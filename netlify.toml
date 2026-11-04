@@ -3,6 +3,12 @@
   command = "npm install && npm run build"
 
 [[redirects]]
+  from = "/"
+  to = "/私募查询页.html"
+  status = 200
+  force = true
+
+[[redirects]]
   from = "/api/*"
   to = "/.netlify/functions/:splat"
   status = 200
