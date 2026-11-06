@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>优美利投资 · 私募档案</title>
+<style>
+:root{--bg:#1e2227;--surface:#262a30;--surface2:#2c3138;--line:#33383f;--line2:#3e444c;
+--ink:#e8eaed;--ink2:#b9bfc7;--muted:#8a929c;--brand:#e05a4e;--brand-d:#c75042;
+--brand-soft:#3a2623;--brand-line:#5a3530}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink2);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;font-size:14.5px}
+a{color:var(--brand-d);text-decoration:none}
+.topbar{position:sticky;top:0;z-index:10;display:flex;align-items:center;gap:14px;padding:11px 20px;background:var(--surface);border-bottom:1px solid var(--line)}
+.back{font-size:13px;color:var(--ink2);border:1px solid var(--line2);padding:5px 11px;border-radius:7px;background:var(--surface2)}
+.back:hover{color:#fff;border-color:var(--brand)}
+.crumb{font-weight:700;color:var(--ink)}
+.wrap{display:flex;min-height:calc(100vh - 49px)}
+.side{width:250px;flex:0 0 250px;border-right:1px solid var(--line);background:var(--surface2);display:flex;flex-direction:column;position:sticky;top:49px;height:calc(100vh - 49px)}
+.search{margin:12px;padding:8px 11px;border:1px solid var(--line2);border-radius:8px;background:var(--surface);color:var(--ink);font-size:13px;outline:none}
+.search:focus{border-color:var(--brand)}
+.list{flex:1;overflow-y:auto;padding:0 8px 14px}
+.it{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:7px 10px;border-radius:7px;cursor:pointer;font-size:13.5px;color:var(--ink2);margin:2px 0}
+.it:hover{background:var(--surface);color:var(--ink)}
+.it.on{background:var(--brand);color:#fff}
+.it.on .tier{color:rgba(255,255,255,.82)}
+.nm{font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tier{font-size:11px;color:var(--muted);flex-shrink:0}
+.main{flex:1;min-width:0;padding:26px 32px 48px}
+.title{font-size:26px;font-weight:800;color:var(--ink);letter-spacing:-.01em;margin:0}
+.full{font-size:13px;color:var(--muted);margin:6px 0 0}
+.badges{display:flex;flex-wrap:wrap;gap:6px;margin:14px 0 4px}
+.badge{font-size:12px;padding:3px 10px;border-radius:999px;background:var(--brand-soft);color:var(--brand-d);border:1px solid var(--brand-line);white-space:nowrap}
+.body{line-height:1.8;color:var(--ink2);font-size:14.5px;max-width:1000px}
+.body h2{font-size:19px;color:var(--ink);border-bottom:2px solid var(--line);padding-bottom:7px;margin:28px 0 14px}
+.body h3{font-size:17px;color:var(--ink);margin:22px 0 10px;border-left:3px solid var(--brand);padding-left:10px}
+.body h4{font-size:15px;color:var(--ink2);margin:16px 0 8px;font-weight:700}
+.body ul,.body ol{margin:8px 0 14px;padding-left:22px}
+.body li{margin:4px 0}
+.body li::marker{color:var(--brand)}
+.body blockquote{margin:10px 0;padding:10px 16px;background:var(--surface2);border-left:3px solid var(--brand);color:var(--ink2);border-radius:0 8px 8px 0}
+.body strong{color:var(--ink)}
+.body p{margin:8px 0}
+.body table{border-collapse:collapse;margin:14px 0;width:100%;font-size:13.5px;font-variant-numeric:tabular-nums}
+.body th,.body td{border:1px solid var(--line);padding:7px 12px;text-align:left}
+.body th{background:var(--surface2)}
+.body table.props td.pk{color:var(--ink);font-weight:600;white-space:nowrap;background:var(--surface2);width:200px}
+.body hr{border:none;border-top:1px solid var(--line);margin:20px 0}
+.body a{color:var(--brand-d)}
+.body code,.body pre{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:.9em;background:var(--surface2);padding:1px 5px;border-radius:4px}
+</style>
+</head>
+<body>
+<div class="topbar"><a class="back" href="../../index.html">← 返回查询页</a><span class="crumb">优美利投资</span></div>
+<div class="wrap">
+<aside class="side">
+<input class="search" id="q" placeholder="搜索公司 / 快速跳转…" oninput="f()">
+<div class="list" id="list">
+<a class="it" href="../%E5%90%8D%E7%A7%B0/" data-n="名称 全称"><span class="nm">名称</span><span class="tier">规模梯队</span></a><a class="it" href="../%E5%90%8D%E7%A7%B0/" data-n="名称 全称"><span class="nm">名称</span><span class="tier">规模梯队</span></a><a class="it" href="../%E4%B8%87%E6%9F%8F%E5%9F%BA%E9%87%91/" data-n="万柏基金 万柏私募基金管理有限公司"><span class="nm">万柏基金</span><span class="tier">20-50亿</span></a><a class="it" href="../%E4%B8%8A%E6%B5%B7%E5%88%A9%E5%B9%84%E7%A7%81%E5%8B%9F/" data-n="上海利幄私募 上海利幄私募基金管理有限公司"><span class="nm">上海利幄私募</span><span class="tier">50-100亿</span></a><a class="it" href="../%E4%B8%8A%E6%B5%B7%E6%9D%BE%E7%86%99%E7%A7%81%E5%8B%9F/" data-n="上海松熙私募 上海松熙私募基金管理合伙企业（有限合伙）"><span class="nm">上海松熙私募</span><span class="tier">100-200亿</span></a><a class="it" href="../%E4%B8%8A%E6%B5%B7%E8%BF%9C%E6%BE%9C/" data-n="上海远澜 上海远澜私募基金管理有限公司"><span class="nm">上海远澜</span><span class="tier">100-200亿</span></a><a class="it" href="../%E4%B8%8A%E6%B5%B7%E8%BF%9C%E8%A1%8C%E7%A7%81%E5%8B%9F/" data-n="上海远行私募 上海远行私募基金管理有限公司"><span class="nm">上海远行私募</span><span class="tier">50-100亿</span></a><a class="it" href="../%E4%B8%8A%E6%B5%B7%E9%B9%A4%E7%A6%A7%E7%A7%81%E5%8B%9F/" data-n="上海鹤禧私募 上海鹤禧私募基金管理有限公司"><span class="nm">上海鹤禧私募</span><span class="tier">20-50亿</span></a><a class="it" href="../%E4%B8%96%E7%BA%AA%E5%89%8D%E6%B2%BF/" data-n="世纪前沿 海南世纪前沿私募基金管理有限公司"><span class="nm">世纪前沿</span><span class="tier">500亿以上</span></a><a class="it" href="../%E4%B8%9C%E6%96%B9%E6%B8%AF%E6%B9%BE/" data-n="东方港湾 深圳东方港湾投资管理股份有限公司"><span class="nm">东方港湾</span><span class="tier">200-500亿</span></a><a class="it" href="../%E4%B8%AD%E6%AC%A7%E7%91%9E%E5%8D%9A/" data-n="中欧瑞博 深圳市中欧瑞博投资管理股份有限公司"><span class="nm">中欧瑞博</span><span class="tier">100-200亿</span></a><a class="it" href="../%E4%B8%AD%E9%87%91%E4%BC%97%E9%91%AB/" data-n="中金众鑫 北京中金众鑫投资管理有限公司"><span class="nm">中金众鑫</span><span class="tier">100-200亿</span></a><a class="it" href="../%E4%B9%85%E6%9C%9F%E6%8A%95%E8%B5%84/" data-n="久期投资 上海久期投资有限公司"><span class="nm">久期投资</span><span class="tier">100-200亿</span></a><a class="it" href="../%E4%B9%90%E7%91%9E%E8%B5%84%E4%BA%A7/" data-n="乐瑞资产 北京乐瑞资产管理有限公司"><span class="nm">乐瑞资产</span><span class="tier">100-200亿</span></a><a class="it" href="../%E4%B9%9D%E5%9D%A4/" data-n="九坤 九坤投资(北京)有限公司"><span class="nm">九坤</span><span class="tier">500亿以上</span></a><a class="it" href="../%E4%B9%BE%E7%9E%BB%E6%8A%95%E8%B5%84/" data-n="乾瞻投资 浙江乾瞻投资管理有限公司"><span class="nm">乾瞻投资</span><span class="tier">待核实</span></a><a class="it" href="../%E4%B9%BE%E8%B1%A1%E6%8A%95%E8%B5%84/" data-n="乾象投资 北京乾象私募基金管理有限公司"><span class="nm">乾象投资</span><span class="tier">100-200亿</span></a><a class="it" href="../%E4%BA%AC%E5%8D%8E%E4%B8%96%E5%AE%B6%E7%A7%81%E5%8B%9F/" data-n="京华世家私募 京华世家私募基金管理（北京）有限公司"><span class="nm">京华世家私募</span><span class="tier">100-200亿</span></a><a class="it" href="../%E4%BB%81%E6%A1%A5%E8%B5%84%E4%BA%A7/" data-n="仁桥资产 仁桥（北京）资产管理有限公司"><span class="nm">仁桥资产</span><span class="tier">100-200亿</span></a><a class="it on" href="../%E4%BC%98%E7%BE%8E%E5%88%A9%E6%8A%95%E8%B5%84/" data-n="优美利投资 深圳市优美利投资管理有限公司"><span class="nm">优美利投资</span><span class="tier">50-100亿</span></a><a class="it" href="../%E4%BD%B3%E6%9C%9F%E6%8A%95%E8%B5%84/" data-n="佳期投资 上海佳期私募基金管理有限公司"><span class="nm">佳期投资</span><span class="tier">500亿以上</span></a><a class="it" href="../%E4%BF%A1%E5%BC%98%E5%A4%A9%E7%A6%BE/" data-n="信弘天禾 北京信弘天禾资产管理中心（有限合伙）"><span class="nm">信弘天禾</span><span class="tier">200-500亿</span></a><a class="it" href="../%E4%BF%A1%E7%92%9E%E6%8A%95%E8%B5%84/" data-n="信璞投资 上海信璞私募基金管理中心（有限合伙）"><span class="nm">信璞投资</span><span class="tier">20-50亿</span></a><a class="it" href="../%E5%80%8D%E6%BC%BE%E9%87%8F%E5%8C%96/" data-n="倍漾量化 南京倍漾私募基金管理有限公司"><span class="nm">倍漾量化</span><span class="tier">100-200亿</span></a><a class="it" href="../%E5%81%A5%E9%A1%BA%E6%8A%95%E8%B5%84/" data-n="健顺投资 上海健顺投资管理有限公司"><span class="nm">健顺投资</span><span class="tier">20-50亿</span></a><a class="it" href="../%E5%85%83%E5%BA%B7%E8%B5%84%E4%BA%A7/" data-n="元康资产 芜湖元康私募基金管理有限公司"><span class="nm">元康资产</span><span class="tier">50-100亿</span></a><a class="it" href="../%E5%86%B2%E7%A7%AF%E8%B5%84%E4%BA%A7/" data-n="冲积资产 上海冲积资产管理中心（有限合伙）"><span class="nm">冲积资产</span><span class="tier">50-100亿</span></a><a class="it" href="../%E5%87%AF%E8%AF%BB%E6%8A%95%E8%B5%84/" data-n="凯读投资 北京凯读私募基金管理有限公司"><span class="nm">凯读投资</span><span class="tier">100-200亿</span></a><a class="it" href="../%E5%88%A9%E4%BD%8D%E6%8A%95%E8%B5%84/" data-n="利位投资 上海利位私募基金管理有限公司"><span class="nm">利位投资</span><span class="tier">待核实</span></a><a class="it" href="../%E5%8B%A4%E8%BE%B0%E8%B5%84%E4%BA%A7/" data-n="勤辰资产 上海勤辰私募基金管理合伙企业（有限合伙）"><span class="nm">勤辰资产</span><span class="tier">100-200亿</span></a><a class="it" href="../%E5%8D%83%E6%83%A0%E8%B5%84%E6%9C%AC/" data-n="千惠资本 深圳前海千惠资产管理有限公司"><span class="nm">千惠资本</span><span class="tier">50-100亿</span></a><a class="it" href="../%E5%8D%83%E6%9C%94%E6%8A%95%E8%B5%84/" data-n="千朔投资 上海千朔投资管理有限公司"><span class="nm">千朔投资</span><span class="tier">100-200亿</span></a><a class="it" href="../%E5%8D%83%E8%B1%A1%E8%B5%84%E4%BA%A7/" data-n="千象资产 上海千象资产管理有限公司"><span class="nm">千象资产</span><span class="tier">待核实</span></a><a class="it" href="../%E5%8D%8A%E9%9E%85%E7%A7%81%E5%8B%9F/" data-n="半鞅私募 上海半鞅私募基金管理合伙企业（有限合伙）"><span class="nm">半鞅私募</span><span class="tier">100-200亿</span></a><a class="it" href="../%E5%8D%8E%E5%B9%B4%E7%A7%81%E5%8B%9F/" data-n="华年私募 上海华年私募基金管理有限公司"><span class="nm">华年私募</span><span class="tier">100-200亿</span></a><a class="it" href="../%E5%8D%93%E8%AF%86%E5%9F%BA%E9%87%91/" data-n="卓识基金 北京卓识私募基金管理有限公司"><span class="nm">卓识基金</span><span class="tier">100-200亿</span></a><a class="it" href="../%E5%8D%97%E5%9C%9F%E8%B5%84%E4%BA%A7/" data-n="南土资产 上海南土资产管理有限公司"><span class="nm">南土资产</span><span class="tier">20-50亿</span></a><a class="it" href="../%E5%8D%9A%E6%99%AE%E7%A7%91%E6%8A%80/" data-n="博普科技 深圳博普科技有限公司"><span class="nm">博普科技</span><span class="tier">50-100亿</span></a><a class="it" href="../%E5%90%88%E6%99%9F%E8%B5%84%E4%BA%A7/" data-n="合晟资产 上海合晟资产管理股份有限公司"><span class="nm">合晟资产</span><span class="tier">100-200亿</span></a><a class="it" href="../%E5%90%88%E9%AA%A5%E7%A7%81%E5%8B%9F/" data-n="合骥私募 上海合骥私募基金管理有限公司"><span class="nm">合骥私募</span><span class="tier">100-200亿</span></a><a class="it" href="../%E5%90%9B%E4%B9%8B%E5%81%A5%E6%8A%95%E8%B5%84/" data-n="君之健投资 广东君之健投资管理有限公司"><span class="nm">君之健投资</span><span class="tier">100-200亿</span></a><a class="it" href="../%E5%90%AF%E6%9E%97%E6%8A%95%E8%B5%84/" data-n="启林投资 上海启林投资管理有限公司"><span class="nm">启林投资</span><span class="tier">100-200亿</span></a><a class="it" href="../%E5%9B%A0%E8%AF%BA%E8%B5%84%E4%BA%A7/" data-n="因诺资产 因诺（上海）资产管理有限公司"><span class="nm">因诺资产</span><span class="tier">100-200亿</span></a><a class="it" href="../%E5%9B%BE%E7%81%B5%E5%9F%BA%E9%87%91/" data-n="图灵基金 图灵私募基金管理（海南）有限公司"><span class="nm">图灵基金</span><span class="tier">100-200亿</span></a><a class="it" href="../%E5%A4%8D%E8%83%9C%E8%B5%84%E4%BA%A7/" data-n="复胜资产 上海复胜资产管理合伙企业（有限合伙）"><span class="nm">复胜资产</span><span class="tier">100-200亿</span></a><a class="it" href="../%E5%A4%A7%E6%9C%B4%E8%B5%84%E4%BA%A7/" data-n="大朴资产 上海大朴资产管理有限公司"><span class="nm">大朴资产</span><span class="tier">100-200亿</span></a><a class="it" href="../%E5%A4%A9%E6%BC%94%E8%B5%84%E6%9C%AC/" data-n="天演资本 上海天演私募基金管理有限公司"><span class="nm">天演资本</span><span class="tier">200-500亿</span></a><a class="it" href="../%E5%A4%A9%E7%AE%97%E9%87%8F%E5%8C%96/" data-n="天算量化 天算量化（北京）资本管理有限公司"><span class="nm">天算量化</span><span class="tier">50-100亿</span></a><a class="it" href="../%E5%A7%9A%E6%B3%BE%E6%B2%B3%E7%A7%81%E5%8B%9F/" data-n="姚泾河私募 上海姚泾河私募基金管理有限公司"><span class="nm">姚泾河私募</span><span class="tier">100-200亿</span></a><a class="it" href="../%E5%AD%90%E5%8D%88%E6%8A%95%E8%B5%84/" data-n="子午投资 上海子午投资管理有限公司"><span class="nm">子午投资</span><span class="tier">100-200亿</span></a><a class="it" href="../%E5%AE%81%E6%B3%89%E8%B5%84%E4%BA%A7/" data-n="宁泉资产 上海宁泉资产管理有限公司"><span class="nm">宁泉资产</span><span class="tier">200-500亿</span></a><a class="it" href="../%E5%AE%89%E8%B4%A4%E6%8A%95%E8%B5%84/" data-n="安贤投资 北京安贤私募基金管理有限公司"><span class="nm">安贤投资</span><span class="tier">100-200亿</span></a><a class="it" href="../%E5%AE%8F%E9%94%A1%E5%9F%BA%E9%87%91/" data-n="宏锡基金 广东宏锡基金管理有限公司"><span class="nm">宏锡基金</span><span class="tier">50-100亿</span></a><a class="it" href="../%E5%AE%BD%E5%BE%B7%E6%8A%95%E8%B5%84/" data-n="宽德投资 上海宽德私募基金管理中心（有限合伙）"><span class="nm">宽德投资</span><span class="tier">200-500亿</span></a><a class="it" href="../%E5%AE%BD%E6%8A%95%E8%B5%84%E4%BA%A7/" data-n="宽投资产 上海宽投资产管理有限公司"><span class="nm">宽投资产</span><span class="tier">100-200亿</span></a><a class="it" href="../%E5%B0%91%E8%96%AE%E6%B4%BE%E6%8A%95%E8%B5%84/" data-n="少薮派投资 上海少薮派投资管理有限公司"><span class="nm">少薮派投资</span><span class="tier">50-100亿</span></a><a class="it" href="../%E5%B1%95%E5%BC%98%E6%8A%95%E8%B5%84/" data-n="展弘投资 上海展弘投资管理有限公司"><span class="nm">展弘投资</span><span class="tier">200-500亿</span></a><a class="it" href="../%E5%B2%9A%E6%B9%96%E5%9F%BA%E9%87%91/" data-n="岚湖基金 海南岚湖私募基金管理有限公司"><span class="nm">岚湖基金</span><span class="tier">100-200亿</span></a><a class="it" href="../%E5%B8%8C%E7%93%A6%E8%B5%84%E4%BA%A7/" data-n="希瓦资产 海南希瓦私募基金管理有限责任公司"><span class="nm">希瓦资产</span><span class="tier">100-200亿</span></a><a class="it" href="../%E5%B8%B8%E6%98%A5%E8%97%A4%E8%B5%84%E4%BA%A7/" data-n="常春藤资产 上海常春藤私募基金管理有限公司"><span class="nm">常春藤资产</span><span class="tier">100-200亿</span></a><a class="it" href="../%E5%B9%B3%E6%96%B9%E5%92%8C%E6%8A%95%E8%B5%84/" data-n="平方和投资 宁波平方和投资管理合伙企业（有限合伙）"><span class="nm">平方和投资</span><span class="tier">500亿以上</span></a><a class="it" href="../%E5%B9%BB%E6%96%B9%E9%87%8F%E5%8C%96/" data-n="幻方量化 宁波幻方量化投资管理合伙企业(有限合伙)"><span class="nm">幻方量化</span><span class="tier">500亿以上</span></a><a class="it" href="../%E5%BC%80%E6%80%9D%E7%A7%81%E5%8B%9F/" data-n="开思私募 上海开思私募基金管理有限公司"><span class="nm">开思私募</span><span class="tier">100-200亿</span></a><a class="it" href="../%E5%BE%AE%E8%A7%82%E5%8D%9A%E6%98%93/" data-n="微观博易 北京微观博易私募基金管理有限公司"><span class="nm">微观博易</span><span class="tier">100-200亿</span></a><a class="it" href="../%E5%BE%B7%E8%B4%9D%E5%9F%BA%E9%87%91/" data-n="德贝基金 上海德贝私募基金管理有限公司"><span class="nm">德贝基金</span><span class="tier">100-200亿</span></a><a class="it" href="../%E5%BF%B5%E7%A9%BA%E5%BF%B5%E8%A7%89/" data-n="念空念觉 上海念觉私募基金管理有限公司"><span class="nm">念空念觉</span><span class="tier">200-500亿</span></a><a class="it" href="../%E6%80%9D%E5%8B%B0%E6%8A%95%E8%B5%84/" data-n="思勰投资 上海思勰投资管理有限公司"><span class="nm">思勰投资</span><span class="tier">100-200亿</span></a><a class="it" href="../%E6%82%A6%E6%B5%B7%E7%9B%88%E5%92%8C/" data-n="悦海盈和 北京悦海盈和私募基金管理有限公司"><span class="nm">悦海盈和</span><span class="tier">50-100亿</span></a><a class="it" href="../%E6%85%8E%E7%9F%A5%E8%B5%84%E4%BA%A7/" data-n="慎知资产 上海慎知资产管理合伙企业（有限合伙）"><span class="nm">慎知资产</span><span class="tier">100-200亿</span></a><a class="it" href="../%E6%89%98%E7%89%B9%E7%A7%81%E5%8B%9F/" data-n="托特私募 托特(三亚)私募基金管理有限公司"><span class="nm">托特私募</span><span class="tier">100-200亿</span></a><a class="it" href="../%E6%8B%BE%E8%B4%9D%E6%8A%95%E8%B5%84/" data-n="拾贝投资 上海拾贝能信私募基金管理合伙企业（有限合伙）"><span class="nm">拾贝投资</span><span class="tier">50-100亿</span></a><a class="it" href="../%E6%95%A6%E5%92%8C%E8%B5%84%E7%AE%A1/" data-n="敦和资管 敦和资产管理有限公司"><span class="nm">敦和资管</span><span class="tier">200-500亿</span></a><a class="it" href="../%E6%97%8C%E5%AE%89%E8%B5%84%E4%BA%A7/" data-n="旌安资产 浙江旌安私募基金有限公司"><span class="nm">旌安资产</span><span class="tier">100-200亿</span></a><a class="it" href="../%E6%98%8E%E6%B1%AF%E6%8A%95%E8%B5%84/" data-n="明汯投资 上海明汯投资管理有限公司"><span class="nm">明汯投资</span><span class="tier">500亿以上</span></a><a class="it" href="../%E6%98%9F%E7%9F%B3%E6%8A%95%E8%B5%84/" data-n="星石投资 北京市星石投资管理有限公司"><span class="nm">星石投资</span><span class="tier">100-200亿</span></a><a class="it" href="../%E6%99%AF%E6%9E%97%E8%B5%84%E4%BA%A7/" data-n="景林资产 上海景林资产管理有限公司"><span class="nm">景林资产</span><span class="tier">500亿以上</span></a><a class="it" href="../%E6%9C%8B%E9%94%A6%E4%BB%B2%E9%98%B3/" data-n="朋锦仲阳 成都朋锦仲阳投资管理中心(有限合伙)"><span class="nm">朋锦仲阳</span><span class="tier">100-200亿</span></a><a class="it" href="../%E6%9C%9B%E6%AD%A3%E8%B5%84%E4%BA%A7/" data-n="望正资产 深圳望正资产管理有限公司"><span class="nm">望正资产</span><span class="tier">100-200亿</span></a><a class="it" href="../%E6%9E%97%E5%9B%AD%E6%8A%95%E8%B5%84/" data-n="林园投资 深圳市林园投资管理有限责任公司"><span class="nm">林园投资</span><span class="tier">200-500亿</span></a><a class="it" href="../%E6%AD%A3%E5%AE%9A%E7%A7%81%E5%8B%9F/" data-n="正定私募 北京正定私募基金管理合伙企业（有限合伙）"><span class="nm">正定私募</span><span class="tier">200-500亿</span></a><a class="it" href="../%E6%AD%A3%E7%80%9B%E8%B5%84%E4%BA%A7/" data-n="正瀛资产 上海正瀛资产管理有限公司"><span class="nm">正瀛资产</span><span class="tier">200-500亿</span></a><a class="it" href="../%E6%B0%B4%E7%92%9E%E5%9F%BA%E9%87%91/" data-n="水璞基金 上海水璞私募基金管理中心（有限合伙）"><span class="nm">水璞基金</span><span class="tier">100-200亿</span></a><a class="it" href="../%E6%B1%9F%E9%98%B4%E7%B1%B3%E5%88%A9%E9%83%BD%E7%A7%81%E5%8B%9F/" data-n="江阴米利都私募 江阴米利都私募基金管理合伙企业（有限合伙）"><span class="nm">江阴米利都私募</span><span class="tier">待核实</span></a><a class="it" href="../%E6%B3%93%E6%BE%84%E6%8A%95%E8%B5%84/" data-n="泓澄投资 北京泓澄投资管理有限公司"><span class="nm">泓澄投资</span><span class="tier">100-200亿</span></a><a class="it" href="../%E6%B4%9B%E4%B9%A6%E6%8A%95%E8%B5%84/" data-n="洛书投资 上海洛书投资管理有限公司"><span class="nm">洛书投资</span><span class="tier">100-200亿</span></a><a class="it" href="../%E6%B5%B7%E5%8D%97%E7%9B%9B%E4%B8%B0%E7%A7%81%E5%8B%9F/" data-n="海南盛丰私募 海南盛丰私募基金管理有限公司"><span class="nm">海南盛丰私募</span><span class="tier">100-200亿</span></a><a class="it" href="../%E6%B6%B5%E5%BE%B7%E6%8A%95%E8%B5%84/" data-n="涵德投资 北京涵德投资管理有限公司"><span class="nm">涵德投资</span><span class="tier">50-100亿</span></a><a class="it" href="../%E6%B7%A1%E6%B0%B4%E6%B3%89/" data-n="淡水泉 淡水泉（北京）投资管理有限公司"><span class="nm">淡水泉</span><span class="tier">200-500亿</span></a><a class="it" href="../%E6%B8%85%E5%92%8C%E6%B3%89%E8%B5%84%E6%9C%AC/" data-n="清和泉资本 北京清和泉资本管理有限公司"><span class="nm">清和泉资本</span><span class="tier">10-20亿</span></a><a class="it" href="../%E6%BA%90%E4%B9%90%E6%99%9F/" data-n="源乐晟 西藏源乐晟资产管理有限公司"><span class="nm">源乐晟</span><span class="tier">100-200亿</span></a><a class="it" href="../%E7%81%B5%E5%9D%87%E6%8A%95%E8%B5%84/" data-n="灵均投资 宁波灵均投资管理合伙企业（有限合伙）"><span class="nm">灵均投资</span><span class="tier">500亿以上</span></a><a class="it" href="../%E7%94%B3%E6%AF%85%E6%8A%95%E8%B5%84/" data-n="申毅投资 上海申毅投资股份有限公司"><span class="nm">申毅投资</span><span class="tier">100-200亿</span></a><a class="it" href="../%E7%9B%98%E4%BA%AC%E6%8A%95%E8%B5%84/" data-n="盘京投资 上海盘京投资管理中心（有限合伙）"><span class="nm">盘京投资</span><span class="tier">200-500亿</span></a><a class="it" href="../%E7%9D%BF%E9%83%A1%E8%B5%84%E4%BA%A7/" data-n="睿郡资产 上海睿郡资产管理有限公司"><span class="nm">睿郡资产</span><span class="tier">200-500亿</span></a><a class="it" href="../%E7%9D%BF%E9%87%8F%E7%A7%81%E5%8B%9F/" data-n="睿量私募 上海睿量私募基金管理有限公司"><span class="nm">睿量私募</span><span class="tier">50-100亿</span></a><a class="it" href="../%E7%9F%A5%E8%A1%8C%E9%80%9A%E8%BE%BE/" data-n="知行通达 深圳知行通达私募证券基金管理合伙企业（有限合伙）"><span class="nm">知行通达</span><span class="tier">待核实</span></a><a class="it" href="../%E7%A3%90%E6%9D%BE%E8%B5%84%E4%BA%A7/" data-n="磐松资产 上海磐松私募基金管理有限公司"><span class="nm">磐松资产</span><span class="tier">100-200亿</span></a><a class="it" href="../%E7%A3%90%E6%B3%BD%E8%B5%84%E4%BA%A7/" data-n="磐泽资产 北京磐泽资产管理有限公司"><span class="nm">磐泽资产</span><span class="tier">100-200亿</span></a><a class="it" href="../%E7%A6%85%E9%BE%99%E8%B5%84%E4%BA%A7/" data-n="禅龙资产 上海禅龙资产管理有限公司"><span class="nm">禅龙资产</span><span class="tier">50-100亿</span></a><a class="it" href="../%E7%A8%B3%E5%8D%9A%E6%8A%95%E8%B5%84/" data-n="稳博投资 上海稳博投资管理有限公司"><span class="nm">稳博投资</span><span class="tier">200-500亿</span></a><a class="it" href="../%E7%BA%A2%E7%AD%B9%E6%8A%95%E8%B5%84/" data-n="红筹投资 深圳市红筹投资有限公司"><span class="nm">红筹投资</span><span class="tier">100-200亿</span></a><a class="it" href="../%E7%BA%BD%E8%BE%BE%E6%8A%95%E8%B5%84/" data-n="纽达投资 珠海纽达投资管理有限公司"><span class="nm">纽达投资</span><span class="tier">100-200亿</span></a><a class="it" href="../%E8%81%9A%E9%B8%A3%E6%8A%95%E8%B5%84/" data-n="聚鸣投资 上海聚鸣投资管理有限公司"><span class="nm">聚鸣投资</span><span class="tier">100-200亿</span></a><a class="it" href="../%E8%85%BE%E8%83%9C%E6%8A%95%E8%B5%84/" data-n="腾胜投资 腾胜投资管理（上海）有限公司"><span class="nm">腾胜投资</span><span class="tier">100-200亿</span></a><a class="it" href="../%E8%87%B4%E8%AF%9A%E5%8D%93%E8%BF%9C/" data-n="致诚卓远 致诚卓远(珠海)投资管理合伙企业(有限合伙)"><span class="nm">致诚卓远</span><span class="tier">100-200亿</span></a><a class="it" href="../%E8%8C%82%E6%BA%90%E9%87%8F%E5%8C%96/" data-n="茂源量化 茂源量化（海南）私募基金管理合伙企业（有限合伙）"><span class="nm">茂源量化</span><span class="tier">200-500亿</span></a><a class="it" href="../%E8%92%99%E7%8E%BA%E6%8A%95%E8%B5%84/" data-n="蒙玺投资 上海蒙玺投资管理有限公司"><span class="nm">蒙玺投资</span><span class="tier">200-500亿</span></a><a class="it" href="../%E8%A1%8D%E5%A4%8D/" data-n="衍复 上海衍复投资管理有限公司"><span class="nm">衍复</span><span class="tier">500亿以上</span></a><a class="it" href="../%E8%AF%9A%E5%A5%87%E8%B5%84%E4%BA%A7/" data-n="诚奇资产 上海诚奇私募基金管理有限公司"><span class="nm">诚奇资产</span><span class="tier">500亿以上</span></a><a class="it" href="../%E8%AF%9A%E6%97%B8%E6%8A%95%E8%B5%84/" data-n="诚旸投资 北京诚旸投资有限公司"><span class="nm">诚旸投资</span><span class="tier">500亿以上</span></a><a class="it" href="../%E8%B5%AB%E5%AF%8C%E6%8A%95%E8%B5%84/" data-n="赫富投资 上海赫富投资有限公司"><span class="nm">赫富投资</span><span class="tier">100-200亿</span></a><a class="it" href="../%E8%BF%9B%E5%8C%96%E8%AE%BA%E8%B5%84%E4%BA%A7/" data-n="进化论资产 海南进化论私募基金管理有限公司"><span class="nm">进化论资产</span><span class="tier">200-500亿</span></a><a class="it" href="../%E8%BF%9C%E5%92%8C%E8%B5%84%E4%BA%A7/" data-n="远和资产 杭州远和私募基金有限公司"><span class="nm">远和资产</span><span class="tier">100-200亿</span></a><a class="it" href="../%E9%87%8D%E9%98%B3%E6%8A%95%E8%B5%84/" data-n="重阳投资 上海重阳投资管理股份有限公司"><span class="nm">重阳投资</span><span class="tier">200-500亿</span></a><a class="it" href="../%E9%87%8F%E6%B4%BE%E6%8A%95%E8%B5%84/" data-n="量派投资 上海量派投资管理有限公司"><span class="nm">量派投资</span><span class="tier">200-500亿</span></a><a class="it" href="../%E9%87%8F%E9%81%93%E6%8A%95%E8%B5%84/" data-n="量道投资 深圳量道投资管理有限公司"><span class="nm">量道投资</span><span class="tier">100-200亿</span></a><a class="it" href="../%E9%87%8F%E9%AD%81%E7%A7%81%E5%8B%9F/" data-n="量魁私募 上海量魁私募基金管理有限公司"><span class="nm">量魁私募</span><span class="tier">100-200亿</span></a><a class="it" href="../%E9%87%91%E6%88%88%E9%87%8F%E9%94%90/" data-n="金戈量锐 宁波金戈量锐资产管理有限公司"><span class="nm">金戈量锐</span><span class="tier">100-200亿</span></a><a class="it" href="../%E9%93%B6%E5%8F%B6%E6%8A%95%E8%B5%84/" data-n="银叶投资 上海银叶投资有限公司"><span class="nm">银叶投资</span><span class="tier">200-500亿</span></a><a class="it" href="../%E9%94%90%E5%A4%A9%E6%8A%95%E8%B5%84/" data-n="锐天投资 上海锐天投资管理有限公司"><span class="nm">锐天投资</span><span class="tier">50-100亿</span></a><a class="it" href="../%E9%A1%BD%E5%B2%A9%E8%B5%84%E4%BA%A7/" data-n="顽岩资产 上海顽岩私募基金管理有限公司"><span class="nm">顽岩资产</span><span class="tier">500亿以上</span></a><a class="it" href="../%E9%AB%98%E6%AF%85%E8%B5%84%E4%BA%A7/" data-n="高毅资产 上海高毅资产管理合伙企业（有限合伙）"><span class="nm">高毅资产</span><span class="tier">500亿以上</span></a><a class="it" href="../%E9%B2%81%E6%B0%91%E6%8A%95/" data-n="鲁民投 鲁民投基金管理有限公司"><span class="nm">鲁民投</span><span class="tier">100-200亿</span></a><a class="it" href="../%E9%B8%A3%E7%86%99%E8%B5%84%E6%9C%AC/" data-n="鸣熙资本 上海鸣熙资产管理有限公司"><span class="nm">鸣熙资本</span><span class="tier">100-200亿</span></a><a class="it" href="../%E9%B8%A3%E7%9F%B3%E5%9F%BA%E9%87%91/" data-n="鸣石基金 上海鸣石私募基金管理有限公司"><span class="nm">鸣石基金</span><span class="tier">500亿以上</span></a><a class="it" href="../%E9%BB%91%E7%BF%BC%E8%B5%84%E4%BA%A7/" data-n="黑翼资产 上海黑翼资产管理有限公司"><span class="nm">黑翼资产</span><span class="tier">500亿以上</span></a><a class="it" href="../%E9%BD%90%E5%AE%B6%E7%A7%81%E5%8B%9F/" data-n="齐家私募 齐家私募基金管理(海南)有限公司"><span class="nm">齐家私募</span><span class="tier">100-200亿</span></a><a class="it" href="../%E9%BE%99%E6%97%97%E7%A7%91%E6%8A%80/" data-n="龙旗科技 杭州龙旗科技有限公司"><span class="nm">龙旗科技</span><span class="tier">500亿以上</span></a><a class="it" href="../%E8%B6%A3%E6%97%B6%E8%B5%84%E4%BA%A7/" data-n="趣时资产 上海趣时资产管理有限公司"><span class="nm">趣时资产</span><span class="tier">50-100亿</span></a><a class="it" href="../%E6%89%BF%E5%A3%B9%E7%A7%81%E5%8B%9F/" data-n="承壹私募 上海承壹私募基金管理有限公司"><span class="nm">承壹私募</span><span class="tier">20-50亿</span></a><a class="it" href="../%E5%AE%BD%E8%BF%9C%E8%B5%84%E4%BA%A7/" data-n="宽远资产 上海宽远资产管理有限公司"><span class="nm">宽远资产</span><span class="tier">50-100亿</span></a><a class="it" href="../%E4%B8%8A%E6%B5%B7%E4%BF%9D%E9%93%B6%E7%A7%81%E5%8B%9F/" data-n="上海保银私募 上海保银私募基金管理有限公司"><span class="nm">上海保银私募</span><span class="tier">50-100亿</span></a><a class="it" href="../%E5%90%88%E8%BF%9C%E7%A7%81%E5%8B%9F/" data-n="合远私募 上海合远私募基金管理有限公司"><span class="nm">合远私募</span><span class="tier">50-100亿</span></a><a class="it" href="../%E5%90%8C%E7%8A%87%E6%8A%95%E8%B5%84/" data-n="同犇投资 上海同犇投资管理中心(有限合伙)"><span class="nm">同犇投资</span><span class="tier">20-50亿</span></a><a class="it" href="../%E6%B0%B8%E5%AE%89%E5%9B%BD%E5%AF%8C/" data-n="永安国富 永安国富资产管理有限公司"><span class="nm">永安国富</span><span class="tier">50-100亿</span></a><a class="it" href="../%E5%BA%B7%E6%9B%BC%E5%BE%B7%E8%B5%84%E6%9C%AC/" data-n="康曼德资本 深圳市康曼德资本管理有限公司"><span class="nm">康曼德资本</span><span class="tier">50-100亿</span></a><a class="it" href="../%E7%9B%B8%E8%81%9A%E8%B5%84%E6%9C%AC/" data-n="相聚资本 相聚资本管理有限公司"><span class="nm">相聚资本</span><span class="tier">50-100亿</span></a><a class="it" href="../%E6%B1%89%E5%92%8C%E8%B5%84%E6%9C%AC/" data-n="汉和资本 北京汉和汉华资本管理有限公司"><span class="nm">汉和资本</span><span class="tier">50-100亿</span></a><a class="it" href="../%E7%A6%A7%E6%82%A6%E7%A7%81%E5%8B%9F/" data-n="禧悦私募 北京禧悦私募基金管理有限公司(曾用名:北京禧悦投资管理有限公司)"><span class="nm">禧悦私募</span><span class="tier">50-100亿</span></a><a class="it" href="../%E6%81%92%E9%82%A6%E5%85%86%E4%B8%B0/" data-n="恒邦兆丰 深圳市恒邦兆丰私募证券基金管理有限公司(曾用名:深圳市前海恒邦兆丰资产管理有限公司)"><span class="nm">恒邦兆丰</span><span class="tier">50-100亿</span></a><a class="it" href="../%E5%A3%B9%E7%82%B9%E7%BA%B3%E9%94%A6%E7%A7%81%E5%8B%9F/" data-n="壹点纳锦私募 壹点纳锦(泉州)私募基金管理有限公司(曾用名:晋江壹点纳锦资产管理有限公司)"><span class="nm">壹点纳锦私募</span><span class="tier">50-100亿</span></a><a class="it" href="../%E7%9B%9B%E9%BA%92%E8%B5%84%E4%BA%A7/" data-n="盛麒资产 宁波梅山保税港区盛麒资产管理有限公司"><span class="nm">盛麒资产</span><span class="tier">20-50亿</span></a><a class="it" href="../%E5%96%9C%E4%B8%96%E6%B6%A6/" data-n="喜世润 上海喜世润投资管理有限公司"><span class="nm">喜世润</span><span class="tier">20-50亿</span></a><a class="it" href="../%E6%98%93%E5%90%8C%E6%8A%95%E8%B5%84/" data-n="易同投资 深圳市易同投资有限公司"><span class="nm">易同投资</span><span class="tier">10-20亿</span></a><a class="it" href="../%E9%87%91%E7%BF%BC%E5%9F%BA%E9%87%91/" data-n="金翼基金 金翼私募基金管理(珠海横琴)有限公司"><span class="nm">金翼基金</span><span class="tier">10-20亿</span></a><a class="it" href="../%E6%B2%A3%E4%BA%AC%E8%B5%84%E6%9C%AC/" data-n="沣京资本 沣京资本管理(北京)有限公司"><span class="nm">沣京资本</span><span class="tier">50-100亿</span></a><a class="it" href="../%E8%89%BE%E6%96%B9%E8%B5%84%E4%BA%A7/" data-n="艾方资产 上海艾方资产管理有限公司"><span class="nm">艾方资产</span><span class="tier">50-100亿</span></a><a class="it" href="../%E5%91%88%E7%91%9E%E6%8A%95%E8%B5%84/" data-n="呈瑞投资 上海呈瑞投资管理有限公司"><span class="nm">呈瑞投资</span><span class="tier">50-100亿</span></a><a class="it" href="../%E5%98%89%E7%9F%B3%E5%A4%A7%E5%B2%A9/" data-n="嘉石大岩 珠海嘉石大岩私募证券基金管理有限公司"><span class="nm">嘉石大岩</span><span class="tier">100-200亿</span></a><a class="it" href="../%E7%BF%B0%E8%8D%A3%E6%8A%95%E8%B5%84/" data-n="翰荣投资 深圳翰荣私募证券基金管理有限公司(曾用名:深圳翰荣投资管理有限公司)"><span class="nm">翰荣投资</span><span class="tier">50-100亿</span></a><a class="it" href="../%E4%BC%9A%E4%B8%96%E8%B5%84%E4%BA%A7/" data-n="会世资产 上海会世私募基金管理有限公司"><span class="nm">会世资产</span><span class="tier">50-100亿</span></a><a class="it" href="../%E5%9D%A4%E6%9C%9B%E5%9F%BA%E9%87%91/" data-n="坤望基金 上海坤望私募基金管理有限公司"><span class="nm">坤望基金</span><span class="tier">20-50亿</span></a><a class="it" href="../%E9%87%8F%E7%9B%88%E6%8A%95%E8%B5%84/" data-n="量盈投资 浙江量盈投资管理有限公司"><span class="nm">量盈投资</span><span class="tier">50-100亿</span></a><a class="it" href="../%E6%80%9D%E6%99%94%E6%8A%95%E8%B5%84/" data-n="思晔投资 上海思晔投资管理有限公司"><span class="nm">思晔投资</span><span class="tier">50-100亿</span></a><a class="it" href="../%E8%B1%A1%E9%99%90%E8%B5%84%E4%BA%A7/" data-n="象限资产 上海象限资产管理有限公司"><span class="nm">象限资产</span><span class="tier">50-100亿</span></a><a class="it" href="../%E4%BA%91%E8%B5%B7%E9%87%8F%E5%8C%96/" data-n="云起量化 宁波云起私募基金管理有限公司"><span class="nm">云起量化</span><span class="tier">50-100亿</span></a><a class="it" href="../%E5%BE%B7%E5%8A%AD%E6%8A%95%E8%B5%84/" data-n="德劭投资 德劭投资管理(上海)有限公司"><span class="nm">德劭投资</span><span class="tier">50-100亿</span></a><a class="it" href="../%E4%BA%A6%E8%B5%8B%E9%87%8F%E5%8C%96/" data-n="亦赋量化 亦赋私募基金管理(海南)有限公司"><span class="nm">亦赋量化</span><span class="tier">50-100亿</span></a><a class="it" href="../%E5%9D%87%E6%88%90%E8%B5%84%E4%BA%A7/" data-n="均成资产 广东横琴均成私募基金管理有限公司"><span class="nm">均成资产</span><span class="tier">50-100亿</span></a><a class="it" href="../%E5%AD%9D%E5%BA%B8%E7%A7%81%E5%8B%9F/" data-n="孝庸私募 上海孝庸私募基金管理有限公司"><span class="nm">孝庸私募</span><span class="tier">100-200亿</span></a><a class="it" href="../%E9%93%AD%E8%B7%83%E7%A7%81%E5%8B%9F/" data-n="铭跃私募 上海铭跃私募基金管理合伙企业(有限合伙)"><span class="nm">铭跃私募</span><span class="tier">20-50亿</span></a><a class="it" href="../%E5%80%8D%E8%87%B4%E7%A7%81%E5%8B%9F/" data-n="倍致私募 杭州倍致私募基金管理有限公司"><span class="nm">倍致私募</span><span class="tier">50-100亿</span></a><a class="it" href="../%E8%A1%8D%E5%90%88%E7%A7%81%E5%8B%9F/" data-n="衍合私募 上海衍合私募基金管理有限公司"><span class="nm">衍合私募</span><span class="tier">20-50亿</span></a><a class="it" href="../%E7%BB%86%E6%B0%B4%E8%B5%84%E6%9C%AC/" data-n="细水资本 成都细水资产管理有限公司"><span class="nm">细水资本</span><span class="tier">20-50亿</span></a><a class="it" href="../%E7%8E%84%E4%BF%A1%E8%B5%84%E4%BA%A7/" data-n="玄信资产 上海玄信资产管理中心(有限合伙)"><span class="nm">玄信资产</span><span class="tier">50-100亿</span></a><a class="it" href="../%E5%98%89%E6%87%BF%E8%90%83%E7%A7%81%E5%8B%9F/" data-n="嘉懿萃私募 上海嘉懿萃私募基金管理有限公司"><span class="nm">嘉懿萃私募</span><span class="tier">待核实</span></a><a class="it" href="../%E8%A1%8D%E7%9B%9B%E8%B5%84%E4%BA%A7/" data-n="衍盛资产 衍盛私募证券投资基金管理(深圳)有限公司"><span class="nm">衍盛资产</span><span class="tier">20-50亿</span></a><a class="it" href="../%E6%A9%A1%E6%9C%A8%E8%B5%84%E4%BA%A7/" data-n="橡木资产 杭州橡木私募基金管理有限公司"><span class="nm">橡木资产</span><span class="tier">20-50亿</span></a><a class="it" href="../%E6%AD%A3%E4%BB%81%E9%87%8F%E5%8C%96/" data-n="正仁量化 海南正仁量化私募基金管理有限公司"><span class="nm">正仁量化</span><span class="tier">待核实</span></a><a class="it" href="../%E5%87%8C%E9%A1%B6%E6%8A%95%E8%B5%84/" data-n="凌顶投资 宁波梅山保税港区凌顶投资管理有限公司"><span class="nm">凌顶投资</span><span class="tier">100-200亿</span></a><a class="it" href="../%E9%92%B1%E5%94%90%E6%B0%B8%E5%88%A9/" data-n="钱唐永利 浙江钱唐永利资产管理有限公司"><span class="nm">钱唐永利</span><span class="tier">50-100亿</span></a><a class="it" href="../%E6%9A%96%E6%B5%81%E8%B5%84%E4%BA%A7/" data-n="暖流资产 暖流资产管理股份有限公司"><span class="nm">暖流资产</span><span class="tier">50-100亿</span></a><a class="it" href="../%E6%98%A0%E9%9B%AA%E8%B5%84%E6%9C%AC/" data-n="映雪资本 上海映雪投资管理中心(有限合伙)"><span class="nm">映雪资本</span><span class="tier">待核实</span></a><a class="it" href="../%E9%81%82%E7%8E%96%E7%A7%81%E5%8B%9F/" data-n="遂玖私募 杭州遂玖私募基金管理有限公司(曾用名:杭州遂玖资产管理有限公司)"><span class="nm">遂玖私募</span><span class="tier">100-200亿</span></a><a class="it" href="../%E9%92%A7%E5%AF%8C%E6%8A%95%E8%B5%84/" data-n="钧富投资 杭州钧富投资管理合伙企业(有限合伙)"><span class="nm">钧富投资</span><span class="tier">20-50亿</span></a><a class="it" href="../%E6%81%92%E5%BE%B7%E6%97%B6%E4%BB%A3/" data-n="恒德时代 北京恒德时代私募基金管理有限公司(曾用名:北京恒昌弘德资产管理有限公司)"><span class="nm">恒德时代</span><span class="tier">50-100亿</span></a><a class="it" href="../%E5%AE%81%E6%B0%B4%E8%B5%84%E6%9C%AC/" data-n="宁水资本 厦门宁水私募基金管理有限公司(曾用名:厦门宁水投资管理有限公司)"><span class="nm">宁水资本</span><span class="tier">50-100亿</span></a><a class="it" href="../%E6%AD%8C%E6%96%90%E8%AF%BA%E5%AE%9D%E8%B5%84%E4%BA%A7/" data-n="歌斐诺宝资产 歌斐诺宝(上海)资产管理有限公司"><span class="nm">歌斐诺宝资产</span><span class="tier">50-100亿</span></a><a class="it" href="../%E8%9E%8D%E8%91%B5%E6%8A%95%E8%B5%84/" data-n="融葵投资 上海融葵投资管理有限公司"><span class="nm">融葵投资</span><span class="tier">50-100亿</span></a><a class="it" href="../%E9%93%B8%E9%94%8B%E8%B5%84%E4%BA%A7/" data-n="铸锋资产 铸锋资产管理(北京)有限公司"><span class="nm">铸锋资产</span><span class="tier">20-50亿</span></a><a class="it" href="../%E5%B9%BF%E4%B8%9C%E5%BE%B7%E6%B1%87%E6%8A%95%E8%B5%84/" data-n="广东德汇投资 广东德汇投资管理有限公司"><span class="nm">广东德汇投资</span><span class="tier">待核实</span></a><a class="it" href="../%E6%B5%99%E6%B1%9F%E9%93%B6%E4%B8%87/" data-n="浙江银万 浙江银万私募基金管理有限公司(曾用名:浙江银万斯特投资管理有限公司)"><span class="nm">浙江银万</span><span class="tier">20-50亿</span></a><a class="it" href="../%E5%9E%82%E4%BA%91%E7%A7%81%E5%8B%9F/" data-n="垂云私募 海南垂云私募基金管理合伙企业（有限合伙）"><span class="nm">垂云私募</span><span class="tier">100-200亿</span></a>
+</div>
+</aside>
+<main class="main">
+<h1 class="title">优美利投资</h1>
+<div class="full">深圳市优美利投资管理有限公司</div>
+<div class="badges"><span class="badge">规模梯队：50-100亿</span> <span class="badge">主力策略：待核实</span> <span class="badge">量化</span> <span class="badge">诚信：无记录</span> <span class="badge">成立：2014-04-28</span></div>
+<div class="body">
+<h2>笔记属性</h2><h3>基本档案</h3><table class="props"><tbody><tr><td class="pk">登记编号</td><td>P1060844</td></tr></tbody></table><h3>公司基础信息</h3><table class="props"><tbody><tr><td class="pk">组织机构代码</td><td>91440300306003001E</td></tr><tr><td class="pk">成立时间</td><td>2014-04-28</td></tr><tr><td class="pk">登记时间</td><td>2017-01-12</td></tr><tr><td class="pk">注册地</td><td>广东深圳（工商注册地2025-09迁罗湖区HALO广场）</td></tr><tr><td class="pk">实际办公地</td><td>广东省深圳市福田区金田路3037号金中环大厦3006-3009</td></tr><tr><td class="pk">注册资本万元</td><td>1000</td></tr><tr><td class="pk">实缴资本万元</td><td>1000</td></tr><tr><td class="pk">企业性质</td><td>内资企业</td></tr><tr><td class="pk">机构类型</td><td>私募证券投资基金管理人</td></tr><tr><td class="pk">业务类型</td><td>私募证券投资基金、私募证券投资类FOF基金</td></tr><tr><td class="pk">员工总人数</td><td>63（协会口径）；企查查2025年报56人</td></tr><tr><td class="pk">从业资格人数</td><td>62</td></tr><tr><td class="pk">投顾资格</td><td>否</td></tr><tr><td class="pk">法定代表人</td><td>贺金龙</td></tr><tr><td class="pk">实际控制人</td><td>贺金龙</td></tr><tr><td class="pk">在管基金数量</td><td>102</td></tr><tr><td class="pk">股权结构</td><td>贺金龙 65%、优源 15%、众悦优策 20%（贺综合约86.33%）</td></tr><tr><td class="pk">重大事项变更</td><td>2025-09-08 主体资格等变更，办理通过（协会，最近一次）</td></tr><tr><td class="pk">会员类型</td><td>非会员机构（协会公示“是否为会员”为“否”）</td></tr><tr><td class="pk">实控人类型</td><td>自然人</td></tr><tr><td class="pk">股权集中度</td><td>实控人持股&gt;50%（最大出资人 贺金龙）</td></tr><tr><td class="pk">代持或循环出资</td><td>协会公示未见代持或循环出资披露；出资人均为直接持股（2026-10-22 复核）</td></tr><tr><td class="pk">关联机构</td><td>无（协会公示“关联方信息（仅包含关联私募基金管理人）”栏为空）</td></tr><tr><td class="pk">成立年限梯队</td><td>≥10年</td></tr><tr><td class="pk">员工人数梯队</td><td>50-100</td></tr><tr><td class="pk">实缴资本梯队</td><td>1000-5000万</td></tr></tbody></table><h3>团队与治理</h3><table class="props"><tbody><tr><td class="pk">投研组织模式</td><td>待核实</td></tr><tr><td class="pk">核心人员</td><td>贺金龙（董事长/总经理/CIO，华南理工经济学学士、北理工硕士）</td></tr><tr><td class="pk">团队背景</td><td>券商转私</td></tr><tr><td class="pk">团队规模与行业覆盖</td><td>63人（协会）；2025-07专访投研50多人+IT 20多人</td></tr><tr><td class="pk">激励与绑定</td><td>实控人直接65%+间接持股，2026-07自购旗下产品6111万元</td></tr><tr><td class="pk">人员稳定性</td><td>核心团队稳定（公司口径），未见核心人员离职公开报道</td></tr><tr><td class="pk">关键人风险</td><td>待核实</td></tr><tr><td class="pk">机构模式</td><td>精品店型</td></tr></tbody></table><h3>策略与规模</h3><table class="props"><tbody><tr><td class="pk">是否量化</td><td>量化</td></tr><tr><td class="pk">策略大类</td><td>市场中性、债券、股票多头、多资产</td></tr><tr><td class="pk">主力策略</td><td>待核实</td></tr><tr><td class="pk">细分策略</td><td>量化可转债、股票中性（量化对冲）、宏观量化、红利增强、ETF/期权套利</td></tr><tr><td class="pk">投资方法论</td><td>多因子</td></tr><tr><td class="pk">信号频段</td><td>多频融合</td></tr><tr><td class="pk">换手率</td><td>中高换手（低波策略，公司口径）</td></tr><tr><td class="pk">换手率档位</td><td>待核实</td></tr><tr><td class="pk">持仓周期</td><td>转债日内T0与轮动并存、股票中频（公司口径）</td></tr><tr><td class="pk">持仓周期档位</td><td>待核实</td></tr><tr><td class="pk">底层数据输入</td><td>待核实</td></tr><tr><td class="pk">持仓大小盘偏好</td><td>待核实</td></tr><tr><td class="pk">持仓集中度</td><td>严格分散，转债持仓上百只、单券不超4%（公司口径）</td></tr><tr><td class="pk">管理规模</td><td>约75亿元</td></tr><tr><td class="pk">分策略规模</td><td>可转债约20余亿、占比超50%（2025-07，总规模近50亿时点）</td></tr><tr><td class="pk">策略容量</td><td>公司称未触及容量上限，规划继续扩容（2026-07口径）</td></tr><tr><td class="pk">是否临近容量上限</td><td>是</td></tr><tr><td class="pk">策略同质度</td><td>待核实</td></tr><tr><td class="pk">规模梯队</td><td>50-100亿</td></tr><tr><td class="pk">回测机制</td><td>回测-模拟盘-实盘验证，样本内外分开防过拟合（公司口径）</td></tr></tbody></table><h3>风控</h3><table class="props"><tbody><tr><td class="pk">风控体系</td><td>事前/事中/事后三层，独立风控系统盘中监控（公司口径）</td></tr><tr><td class="pk">止损设定</td><td>单日回撤、单券最大回撤比例触发硬约束（公司口径）</td></tr><tr><td class="pk">集中度限制</td><td>单券持仓上限、行业分散、白名单制（公司口径）</td></tr><tr><td class="pk">杠杆水平</td><td>待核实</td></tr><tr><td class="pk">流动性</td><td>低波系列定位高流动性（公司口径）</td></tr><tr><td class="pk">极端行情表现</td><td>2026-07量化回撤潮中转债策略录得正收益（中证报口径）</td></tr></tbody></table><h3>业绩与产品</h3><table class="props"><tbody><tr><td class="pk">代表产品</td><td>优美利赢胜价值1号A（低波）；优美利金安长牛2号A（中波）</td></tr><tr><td class="pk">收益_回撤_超额</td><td>赢胜价值1号A成立来+153.23%/年化15.77%（排排网，2025-12）</td></tr><tr><td class="pk">业绩归因</td><td>多资产配置+转债T0算法增厚+条款套利（公司口径）</td></tr><tr><td class="pk">是否代表业绩</td><td>待核实</td></tr><tr><td class="pk">业绩可查年限</td><td>≥5年（代表产品公开业绩可查至2019年，排排网口径）</td></tr><tr><td class="pk">风险水平</td><td>待核实</td></tr><tr><td class="pk">最大回撤区间</td><td>待核实</td></tr></tbody></table><h3>合规与诚信</h3><table class="props"><tbody><tr><td class="pk">诚信记录</td><td>无</td></tr><tr><td class="pk">利益冲突与关联交易</td><td>协会公示无关联私募管理人；基金经理跟投自家产品</td></tr></tbody></table><h3>运营</h3><table class="props"><tbody><tr><td class="pk">托管机构</td><td>多券商托管：华泰、中信、华安、招商、广发等（天天基金产品页）</td></tr><tr><td class="pk">估值频率</td><td>待核实</td></tr><tr><td class="pk">费率结构</td><td>起投100万元；观复1号A管理费1.5%/托管费0.05%（天天基金）</td></tr><tr><td class="pk">申赎条款</td><td>观复1号A每月第5个工作日开放申赎、名额≤200人（天天基金产品页口径）</td></tr></tbody></table><h2>一、公司基础信息</h2>
+<blockquote>
+<p>本节基础字段取自中基协管理人公示（主表 CSV 快照），采集日期 2026-10-16。</p>
+</blockquote>
+<ul>
+<li>登记编号 P1060844，2014-04-28 成立，2017-01-12 登记，内资企业，私募证券投资基金管理人。</li>
+<li>注册资本 1000 万元、实缴 1000 万元；员工 63 人、从业 62 人；法人 贺金龙、实控人 贺金龙；在管基金 102。</li>
+<li>注册地 省深圳；办公地 广东省深圳市福田区金田路3037号金中环大厦3006-3009。</li>
+<li>业务类型：私募证券投资基金、私募证券投资类FOF基金。</li>
+</ul>
+<h4>协会公示层补充（中基协公示页，2026-10-22）</h4>
+<blockquote>
+<p>以下各项均取自中基协管理人公示页原文，查询日期 2026-10-22，来源见文末溯源表〔[1]〕。</p>
+</blockquote>
+<ul>
+<li>公示全称：深圳市优美利投资管理有限公司（英文名 Shenzhen beautiful Lee Cci Capital Ltd）。</li>
+<li>资本：注册资本 1000 万元、实缴 1000 万元、实缴比例 100%。</li>
+<li>具备投顾资格：否；管理规模区间：100亿元以上；机构信息最后更新：2026-06-17。</li>
+<li>机构官网（协会登记）：<a href="http://www.ym-fund.com" target="_blank" rel="noopener">http://www.ym-fund.com</a></li>
+<li>会员：协会公示“是否为会员”为“否”。</li>
+<li>法律意见书：已办结，出具律所 上海汇茂律师事务所。</li>
+<li>出资人（认缴比例）：贺金龙 65%、深圳市优源企业管理中心（有限合伙） 15%、深圳市众悦优策技术服务中心（有限合伙） 20%。</li>
+<li>实际控制人（协会公示）：贺金龙。</li>
+</ul>
+<p>高管备案信息（协会公示）：</p>
+<ul>
+<li><strong>贺金龙</strong>：法定代表人、总经理、执行董事、投资总监</li>
+<li>2020.11 至今 深圳市优美利投资管理有限公司：法定代表人、总经理、执行董事、投资总监</li>
+<li>2019.06~2020.10 深圳市优美利投资管理有限公司（投资部）：投资总监</li>
+<li>2018.10~2019.04 深圳市优美利投资管理有限公司（投资部）：投资总监</li>
+<li>2017.10~2018.09 深圳市优美利投资管理有限公司（总经办）：法定代表人/执行董事/总经理</li>
+<li>2009.08~2017.07 华泰联合证券有限责任公司（研究部）：分析师</li>
+<li><strong>段懿真</strong>：合规风控负责人、信息填报负责人</li>
+<li>2022.08 至今 深圳市优美利投资管理有限公司：合规风控负责人、信息填报负责人</li>
+<li>2022.03~2022.08 深圳市优美利投资管理有限公司：风控经理</li>
+<li>2020.05~2022.02 广西自贸区中马启元资产管理有限公司：风控经理</li>
+<li>2020.03~2020.04 广西自贸区中马启元资产管理有限公司（风控合规部）：风控经理</li>
+<li>2017.09~2020.02 前海豪略（深圳）投资管理有限公司（总经办）：法定代表人/执行董事/总经理</li>
+<li>2012.08~2017.07 Convoy Financial Group（康宏環球控股有限公司）（金融部）：Wealth Manager and Senior Consulta</li>
+<li>
+<p>2009.07~2011.08 中国电信股份有限公司深圳分公司（政企客户支撑部）：项目工程师</p>
+</li>
+<li>
+<p>产品披露（协会公示统计，数据截至 2026-10-22）：公示产品 175 只，其中在运作 103 只、已清算 72 只；累计应披露而未披露 102 条；投资者查询账号开立率 99.39%。</p>
+</li>
+</ul>
+<h4>工商信息与股权沿革（企查查/启信宝，2026-10-25 检索）</h4>
+<ul>
+<li>事实复核（员工人数口径并列）：协会公示员工 63 人（最新）；企查查 2025 年报口径员工 56 人〔[9]〕；2025-07 专访口径为投研团队 50 多人、IT 团队 20 多人〔[15]〕。三个口径时点不同，并列不改写。</li>
+<li>注册地址变更：工商注册地址 2025-09 由深圳市龙华新区民治大道梅花山庄馨园别墅2704栋变更为深圳市罗湖区笋岗街道笋西社区桃园路260号HALO广场四期五层B06单元〔[9]〕。注意并列：协会公示办公地仍为福田区金中环大厦3006-3009，公司 2025 年报通信地址亦为福田区金中环国际商务大厦3006-09〔[9]〕——工商注册地与协会登记办公地为两个口径，未取舍。</li>
+<li>股权沿革（企查查/启信宝口径）：早期为贺金龙 99% + 谢彩剑 1%；2021 年变更为贺金龙 84% + 深圳市优源企业管理中心（有限合伙）15% + 谢彩剑 1%；2025-05-19/24 谢彩剑退出，新增深圳市众悦优策技术服务中心（有限合伙）持股 20%，贺金龙直接持股由 84% 降至 65%〔[9]〕〔[10]〕。</li>
+<li>间接持股（启信宝口径）：贺金龙综合持股约 86.33%——直接 65%，另通过众悦优策间接约 17.33%（贺在其持 86.67% 份额）、通过优源企业管理中心间接约 4%（贺在其持约 26.666%）；众悦优策疑似员工持股平台〔[10]〕。与协会公示认缴比例（65/15/20）口径不同，并列不取舍。</li>
+<li>主要人员：现任主要人员为贺金龙与监事郑秋娴（2022-07 原主要成员卓娟退出后接任）〔[9]〕〔[10]〕。</li>
+<li>对外投资：重庆优美利大数据科技有限公司（100% 持股，已注销）〔[10]〕。</li>
+<li>工商风险核查：启信宝显示行政处罚无、失信被执行人无、经营异常无〔[10]〕。</li>
+</ul>
+<h2>二、团队与治理</h2>
+<ul>
+<li>核心投研：贺金龙（董事长/总经理/CIO），持股65%，同时担任董事长、总经理、首席投资官三重角色〔[2]〕；华南理工大学经济学学士、北京理工大学硕士，15年券商与私募投资管理经验，擅长宏观量化指标把控资产配置、严控回撤（排排网口径）〔[4]〕。并列媒体口径：上证报2026-09-14专访称其"2008年起深耕券商行业，2014年在深圳创办优美利投资"〔[20]〕——与协会公示履历（2009.08~2017.07 华泰联合证券研究部）并存，仅录原文不改写。</li>
+<li>机构模式：精品店型——深耕可转债量化等细分赛道，核心投资决策集中于创始人〔[2]〕。</li>
+<li>投研组织模式：投研人员占比超过三分之二，核心投研具备数学、工学、金融学、计算机等复合背景（"研究+科技"基因）；公司规划"策略管培生—策略研究员—策略首席"阶梯式人才库〔[2]〕〔[3]〕；2025-07专访口径为投研团队50多人、IT团队20多人〔[15]〕。</li>
+<li>激励与绑定：公司称基金经理已实现财富自由并持续跟投自家产品，实控人高持股以降低道德风险（公司专访口径，注意营销属性）〔[2]〕。公开可验证的绑定证据：2025-05 股权结构调整中新增众悦优策合伙（疑似员工持股平台，贺金龙持86.67%份额）〔[9]〕〔[10]〕；2026年7月公司自购旗下产品6111万元（上证报口径；证券时报统计位列当期百亿私募自购前列）〔[19]〕〔[21]〕。</li>
+<li>人员稳定性：核心团队稳定性较高（公司专访口径）〔[2]〕；2026-10-25 检索未见贺金龙或核心投研人员离职的公开报道，可见人员变动仅为2022-07监事更替（卓娟退出、郑秋娴接任，工商口径）〔[9]〕。</li>
+<li>产学研：与华南理工大学、深圳大学等高校共建实习基地与人才培养平台（公司口径）〔[3]〕。</li>
+</ul>
+<h2>三、策略与规模</h2>
+<ul>
+<li>是否量化：量化。</li>
+<li>策略大类：多资产量化、可转债、股票中性；细分策略：量化可转债、股票中性（量化对冲）、宏观量化、红利增强、ETF/期权套利。</li>
+<li>主力策略：量化可转债——2025-07专访口径可转债规模约20多亿元、占比50%以上，为第一大策略线〔[14]〕；21财经2026-07口径量化方向分为可转债量化、股票量化、现金管理三大策略线，独立建模、独立风控、底层因子互通〔[17]〕。</li>
+<li>发展沿革：2018年确立稳健优先主线；2019年正式开展资管业务并由偏主观判断转向量化交易；2022年深化中低波动产品线；2025年自研智能算法交易系统在券商端上线商用、获香港9号牌（2025-10获牌、2025年12月起管理运作）并发行首只境外产品〔[2]〕〔[3]〕〔[4]〕。并列口径：21财经2026-07称获"香港4/9号牌照"〔[17]〕，与档案原口径（9号牌）并存。</li>
+<li>方法论：估值—动量—风险平价三维决策模型、多因子；信号频段：多频融合——股票量化中频换手、转债日内T0算法、现金管理套利并存〔[2]〕。</li>
+<li>换手率/持仓周期公开口径：可转债量化业绩归因中轮动选债贡献约60%、日内T+0交易贡献约40%〔[15]〕〔[18]〕；转债持仓有时达上百只（另有口径称产品普遍持有100多个标的）〔[14]〕〔[15]〕；量化可转债单券持仓不超4%、覆盖15个以上行业（公司口径）〔[16]〕。公开渠道未见量化换手率/持仓周期数值，档位保留待核实。</li>
+<li>调仓动态：2025年上半年降低信用债仓位、将仓位转移至可转债、增加含权资产配置（公司口径）〔[15]〕。</li>
+<li>策略细节：可转债策略=多因子选债（转债/正股/风险因子）+底仓智能算法T0增厚+下修/回售/强赎条款套利；股票策略=多因子选股（宏观/基本面/量价/事件驱动及另类因子）+股指对冲β；现金管理=全市场交易性套利〔[2]〕〔[3]〕。</li>
+<li>产品线：低波系列（量化对冲为核心：转债量化、股票中性、债券ETF/ETF套利/期权套利，高流动性、中高换手）与中波系列（可转债量化为主）〔[2]〕〔[3]〕。</li>
+<li>规模：100亿以上（协会口径，机构信息2026-06-17更新）；2025年末突破80亿元，2026年4月正式跻身百亿（排排网口径）；专访时公司称管理规模超90亿元、处于多策略管理人"最优区间"，未触及多资产策略容量上限〔[2]〕〔[3]〕。规模时间序列并列（各标出处）：2025-07 专访口径接近50亿元〔[14]〕〔[15]〕；2025年底近75亿元（中证网口径）〔[16]〕、约80亿元（21财经口径）〔[17]〕；2026-07 突破100亿元（21财经口径）〔[17]〕。</li>
+<li>策略容量：公司称未触及多资产策略容量上限〔[2]〕；未来三年规划为做强可转债量化、提升股票量化质量（深耕中频对冲）、扩容现金管理策略（21财经口径，注意营销属性）〔[17]〕。</li>
+</ul>
+<h2>四、风控</h2>
+<ul>
+<li>风控体系：事前（独立风控系统，系统外采+自主开发；策略上线前严格开展模型回测、模拟盘、实盘验证，样本数据分开检测防过拟合）、事中（全部交易账户接入风控系统，设单笔委托/单券持仓/单券最大回撤比例、白名单制等盘中动态监控）、事后（每日收盘业绩归因、策略稳定性与风控执行复盘）三层架构（公司口径）〔[2]〕〔[3]〕。</li>
+<li>止损与集中度：单日回撤、集中度、流动性指标触发即执行风控指令；单券持仓上限、行业分散、敞口实时监控〔[2]〕。</li>
+<li>极端行情应对：实时监控波动率与风险价值、极端行情自动降仓；AI大数据择时系统识别极端情绪与流动性风险、前置预警；压力测试与情景模拟常态化（公司口径）〔[2]〕。</li>
+<li>极端行情实际表现（2026年7月量化回撤潮，第三方报道口径）：7月主流股票量化策略大幅回撤，贺金龙归因于市场极致"抱团"分化、小微盘流动性收缩、行业策略同质化拥挤叠加交易规则调整，属均值回归而非量化底层逻辑受损；公司已调整因子权重、收紧风格偏离风控、降低小微盘敞口，并以多资产多策略平滑波动〔[17]〕。同期（7月）公司可转债策略实现正收益——轮动选债贡献约六成、T+0交易贡献约四成超额；公司5、6月已主动提高中低价、债底充足个券占比，降低高价股性券仓位〔[18]〕。2024年2月微盘股流动性危机期间公司自身业绩表现的公开披露，2026-10-25 检索未见。</li>
+<li>杠杆水平 / 流动性：公开渠道未见杠杆数值披露；低波系列定位高流动性（公司口径）〔[2]〕〔[3]〕。</li>
+</ul>
+<h2>五、业绩与代表产品</h2>
+<ul>
+<li>代表产品：低波系列——优美利赢胜价值1号A、优美利灵活配置金牛1号、优美利复合对冲3号A；中波系列——优美利金安长牛2号A（排排网口径）〔[3]〕。</li>
+<li>业绩口径：代表产品优美利赢胜价值1号A自公开业绩以来连续6年录得正收益（私募排排网口径，截至2026-04，第三方转载，具体收益/回撤数值未见公开）〔[3]〕。交叉验证（中证网2025-12-22专访口径，截至2025-11-28）：赢胜价值1号A类份额成立6年多累计收益超150%、年化超15%〔[16]〕，与排排网口径（+153.23%/年化15.77%，截至2025-12）量级一致。</li>
+<li>持有体验（公司口径，注意营销属性）：贺金龙称低波产品投资者基本都赚钱、中波产品约八成赚钱、高波产品仅约两成赚钱；债券投资十年"零踩雷"，依靠每日监测舆情、盘面、资金流并异动即减仓的纪律〔[16]〕。</li>
+<li>2026年4月末，排排网有业绩显示的9只产品中4只当月净值创历史新高：金安长牛2号、灵活配置金牛1号、赢胜价值5号、复合对冲3号（排排网口径）〔[3]〕。</li>
+<li>产品业绩明细（私募排排网百科口径，数据截至2025-12-05，未经托管复核）：赢胜价值1号A（2019-08-01成立）累计+153.23%、年化15.77%、期间回撤2.35%；赢胜价值5号A（2022-03-03成立）累计+51.42%、年化11.67%、回撤0.85%；金安长牛2号A（2021-12-09成立）累计+69.93%、年化14.21%、回撤13.56%；复合对冲3号（2022-08-24成立）累计+30.83%、年化8.53%、回撤11.91%〔[4]〕。</li>
+<li>早期平台快照（排排网2024-07文章，数据截至2024-06）：赢胜价值1号A成立来+114.42%、年化16.80%、近一年最大回撤2.24%、近一年夏普5.38、年化波动率4.99%（第三方口径，未经托管复核）〔[5]〕。</li>
+<li>中长期排名：财联社统计百亿私募近5年收益均值排名，优美利以112.06%位列季军（财联社口径，检索摘要可见，仅作线索）〔[7]〕。</li>
+<li>天天基金高端理财展示：优美利观复1号A（股票型，贺金龙管理）截至2026-10-16成立以来+214.27%（第三方平台口径，未经托管复核）〔[6]〕。</li>
+<li>2025年公司称中波、低波策略回撤控制在同策略同类产品中居市场头部（公司专访口径，注意营销属性）〔[2]〕。</li>
+<li>净值库内留存归档，存在时效性、无法实时更新。</li>
+</ul>
+<h2>六、合规与诚信</h2>
+<ul>
+<li>诚信记录（原值）：无。</li>
+<li>分层归类：无。</li>
+<li>诚信详情：无。</li>
+<li>公开检索（2026-10-24）：未检索到针对本公司的警示函、行政处罚或监管措施公开记录。</li>
+<li>复核（2026-10-25）：企查查/启信宝工商风险口径——行政处罚无、失信被执行人无、经营异常无，合规状态"表现正常"〔[9]〕〔[10]〕；分层维持「无」。</li>
+<li>冒名风险事件（非公司违规）：2026-06-09 公司发布声明，有第三方未经授权冒用公司名义出现在上市公司调研信息中，公司称无任何人员参与、未授权第三方以公司名义开展调研（东方财富/新浪转载公司声明口径）〔[8]〕。</li>
+<li>获奖记录：2025 中国证券报第十六届私募金牛奖·金牛私募管理公司；证券时报"2024年度金长江奖"卓越风控私募；中航证券"航融杯"航融之星（两年期）、天际之星（年度）、领航之星（季度）（均为评选方/公司口径）〔[2]〕〔[3]〕。</li>
+</ul>
+<h2>七、运营</h2>
+<ul>
+<li>科技投入：公司称每年科技投入超千万元，自研智能算法交易系统2025年在券商端上线商用，公司为该系统最大应用方（公司口径，注意营销属性）〔[2]〕。</li>
+<li>渠道：截至2026年初与十余家头部券商及三方机构建立代销/直投合作，含中航证券产品代销（2026年一季度推进）（公司专访口径）〔[2]〕。</li>
+<li>托管机构（天天基金旗下产品页口径，仅覆盖平台展示产品，2026-10-25 检索）：观复1号A托管人为华泰证券（托管费0.05%/年，不低于0.3万元/年，管理费1.5%）〔[11]〕；稳健长牛8号托管人为华安证券（托管费0.03%，高水位法计提业绩报酬，投资经理贺金龙）〔[12]〕；另多只产品托管人涉及中信证券（灵活配置金牛21号、启航灵活配置13号、方享长牛6号、量化优选3号等）、国泰海通、招商证券、广发证券、中国银河、中信建投等〔[13]〕。整体为多券商分散托管格局；协会公示未见托管机构汇总栏。</li>
+<li>估值频率：公开渠道未见统一披露，2026-10-25 检索未见；一般依基金合同由托管人按约定频率复核（中信证券托管服务页口径）〔[22]〕，保留待核实。</li>
+<li>自购（2026年7月私募自购潮）：公司自购旗下产品6111万元（上证报2026-07-20口径）〔[19]〕；证券时报统计截至7月30日25家私募累计自购14.29亿元，优美利位列百亿私募自购前列〔[21]〕；财联社口径为"不低于5000万元"〔[21]〕。企查查简介另有"2025年7月参与私募自购、金额不低于5000万元"表述，年份口径存疑，与媒体口径（2026年7月）并列不取舍〔[9]〕。</li>
+<li>申赎条款（天天基金高端理财平台产品页口径，仅涉及展示产品）：观复1号A申购赎回开放日为每月第5个工作日，名额限制不超过200人，购买起点100万元，平台展示购买手续费0%〔[6]〕；稳健长牛8号开放日为每周一、三、五〔[12]〕；起投金额100万元为行业通行门槛（排排网百科口径）〔[4]〕。</li>
+</ul>
+<h2>八、信息溯源总表</h2>
+<blockquote>
+<p>本节为该档案全部引用来源的登记表；〔[n]〕与下表编号一一对应。</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>编号</th>
+<th>来源</th>
+<th>链接</th>
+<th>查询时间</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>[1]</td>
+<td>中国证券投资基金业协会·深圳市优美利投资管理有限公司公示页（P1060844；规模区间 100亿元以上；非会员；出资人 3 名；在运作产品 103 只；投资者查询账号开立率 99.39%；关联私募管理人 无）</td>
+<td><a href="https://gs.amac.org.cn/amac-infodisc/res/pof/manager/1610131041103969.html" target="_blank" rel="noopener">https://gs.amac.org.cn/amac-infodisc/res/pof/manager/1610131041103969.html</a></td>
+<td>2026-10-22</td>
+</tr>
+<tr>
+<td>[2]</td>
+<td>界面新闻（转载排排网集团专访）《拒绝大涨大跌，做"寿星"不做"明星"！深度解密优美利投资以多资产量化穿越周期》约2026年（公司专访口径，含营销属性）</td>
+<td><a href="https://m.jiemian.com/article/14397310.html" target="_blank" rel="noopener">https://m.jiemian.com/article/14397310.html</a></td>
+<td>2026-10-24</td>
+</tr>
+<tr>
+<td>[3]</td>
+<td>100万基金网（转私募排排网#深度揭秘100家私募#）《深度揭秘优美利投资：连续6年正收益+新晋百亿！》2026-05-26（第三方转载，含导流营销内容）</td>
+<td><a href="https://www.100wjjw.com/knowledgeinfo/3370.html" target="_blank" rel="noopener">https://www.100wjjw.com/knowledgeinfo/3370.html</a></td>
+<td>2026-10-24</td>
+</tr>
+<tr>
+<td>[4]</td>
+<td>私募排排网《优美利投资私募基金怎么样？优美利投资私募基金怎么买？》2025-12-11（产品业绩数据截至2025-12-05，第三方平台口径，含导流内容）</td>
+<td><a href="https://www.simuwang.com/news/284751.html" target="_blank" rel="noopener">https://www.simuwang.com/news/284751.html</a></td>
+<td>2026-10-24</td>
+</tr>
+<tr>
+<td>[5]</td>
+<td>私募排排网《优美利赢胜价值1号A类基金最新净值_收益排名》2024-07-07（业绩数据截至2024-06，第三方平台口径）</td>
+<td><a href="https://www.simuwang.com/news/259955.html" target="_blank" rel="noopener">https://www.simuwang.com/news/259955.html</a></td>
+<td>2026-10-24</td>
+</tr>
+<tr>
+<td>[6]</td>
+<td>天天基金·高端理财·优美利观复1号A产品页（开放规则/名额/起点/净值，净值截至2026-10-16，第三方平台口径）</td>
+<td><a href="https://fund.eastmoney.com/Gaoduan/flowf12GFYH01.html" target="_blank" rel="noopener">https://fund.eastmoney.com/Gaoduan/flowf12GFYH01.html</a></td>
+<td>2026-10-24</td>
+</tr>
+<tr>
+<td>[7]</td>
+<td>财联社《私募中长期业绩谁领跑？榜单出炉，百亿军团与细分黑马各守强项》2025-10（近5年收益均值112.06%列百亿组季军；检索摘要口径，仅作线索）</td>
+<td><a href="https://www.cls.cn/detail/2248199" target="_blank" rel="noopener">https://www.cls.cn/detail/2248199</a></td>
+<td>2026-10-24</td>
+</tr>
+<tr>
+<td>[8]</td>
+<td>东方财富网（转公司声明）《百亿量化私募优美利投资：经核查，网传公司参与相关企业调研的内容并非公司行为》2026-06-09（冒名澄清声明，非公司违规）</td>
+<td><a href="https://wap.eastmoney.com/a/202606093765492861.html" target="_blank" rel="noopener">https://wap.eastmoney.com/a/202606093765492861.html</a></td>
+<td>2026-10-24</td>
+</tr>
+<tr>
+<td>[9]</td>
+<td>企查查·深圳市优美利投资管理有限公司经营信息（股权沿革2021/2025-05变更、监事郑秋娴、2025年报员工56人、2025-09注册地址迁罗湖HALO广场、年报通信地址福田金中环、无行政处罚）</td>
+<td><a href="https://www.qcc.com/crun/8ba41fc713a24e72db4085654f296b4e.html" target="_blank" rel="noopener">https://www.qcc.com/crun/8ba41fc713a24e72db4085654f296b4e.html</a></td>
+<td>2026-10-25</td>
+</tr>
+<tr>
+<td>[10]</td>
+<td>启信宝·深圳市优美利投资管理有限公司（贺金龙综合持股约86.33%含间接持股、谢彩剑2025-05退出、优源2021年入股、众悦优策疑似员工持股平台、对外投资重庆优美利大数据已注销、行政处罚/失信/经营异常均无）</td>
+<td><a href="https://www.qixin.com/company/3c357f4d-c2ae-4b54-b2fb-2605ab3c93cc" target="_blank" rel="noopener">https://www.qixin.com/company/3c357f4d-c2ae-4b54-b2fb-2605ab3c93cc</a></td>
+<td>2026-10-25</td>
+</tr>
+<tr>
+<td>[11]</td>
+<td>天天基金·高端理财·优美利观复1号A主页（托管人华泰证券、托管费0.05%/年不低于0.3万元、管理费1.5%、每月第5个工作日开放）</td>
+<td><a href="http://fund.eastmoney.com/gaoduan/GFYH01.html" target="_blank" rel="noopener">http://fund.eastmoney.com/gaoduan/GFYH01.html</a></td>
+<td>2026-10-25</td>
+</tr>
+<tr>
+<td>[12]</td>
+<td>天天基金·优美利稳健长牛8号产品页（托管人华安证券、托管费0.03%、开放日每周一三五、高水位法业绩报酬、投资经理贺金龙）</td>
+<td><a href="https://simu.eastmoney.com/pro1003429206.html" target="_blank" rel="noopener">https://simu.eastmoney.com/pro1003429206.html</a></td>
+<td>2026-10-25</td>
+</tr>
+<tr>
+<td>[13]</td>
+<td>天天基金·优美利投资私募基金列表页（多券商托管汇总：中信证券托管灵活配置金牛21号/启航灵活配置13号/方享长牛6号/量化优选3号等，另涉华泰、国泰海通、招商、广发、银河、中信建投）</td>
+<td><a href="https://simu.eastmoney.com/tcinfo80619446.html" target="_blank" rel="noopener">https://simu.eastmoney.com/tcinfo80619446.html</a></td>
+<td>2026-10-25</td>
+</tr>
+<tr>
+<td>[14]</td>
+<td>证券时报《慢慢变富！优美利投资：做"寿星"，不做明星！曝光穿越周期密码》2025-07-17（专访：总规模接近50亿、可转债约20多亿占比50%以上、产品普遍持有100多个标的、低波/中波产品线定位）</td>
+<td><a href="https://www.stcn.com/article/detail/2633231.html" target="_blank" rel="noopener">https://www.stcn.com/article/detail/2633231.html</a></td>
+<td>2026-10-25</td>
+</tr>
+<tr>
+<td>[15]</td>
+<td>中证网《优美利投资董事长贺金龙：聚焦量化多资产中低波投资策略》2025-07-20（轮动选债贡献约60%、日内T+0约40%；转债持仓上百只；投研50多人、IT 20多人；上半年降信用债仓位转可转债）</td>
+<td><a href="https://www.cs.com.cn/tzjj/jjks/202507/t20250720_6502722.html" target="_blank" rel="noopener">https://www.cs.com.cn/tzjj/jjks/202507/t20250720_6502722.html</a></td>
+<td>2026-10-25</td>
+</tr>
+<tr>
+<td>[16]</td>
+<td>中证网《优美利投资贺金龙：用时间证明"慢即是快"》2025-12-22（2025年底规模近75亿；赢胜价值1号A成立6年多累计超150%、年化超15%；转债单券不超4%、覆盖15+行业；债券十年"零踩雷"；低波/中波/高波投资者赚钱比例口径）</td>
+<td><a href="https://www.cs.com.cn/tzjj/jjdt/202512/t20251222_6529372.html" target="_blank" rel="noopener">https://www.cs.com.cn/tzjj/jjdt/202512/t20251222_6529372.html</a></td>
+<td>2026-10-25</td>
+</tr>
+<tr>
+<td>[17]</td>
+<td>21财经《百亿量化私募掌门人贺金龙：量化投资粗放式赚钱时代已经结束》2026-07-21（规模突破100亿、2025年底约80亿；可转债量化/股票量化/现金管理三大策略线；2026-07股票量化回撤归因与因子权重调整、降小微盘敞口；香港4/9号牌照；未来三年规划扩容）</td>
+<td><a href="https://m.21jingji.com/article/20260721/herald/2d5348e824113e65b3ecb44c30749f76.html" target="_blank" rel="noopener">https://m.21jingji.com/article/20260721/herald/2d5348e824113e65b3ecb44c30749f76.html</a></td>
+<td>2026-10-25</td>
+</tr>
+<tr>
+<td>[18]</td>
+<td>证券时报/中国证券报《波动缓冲垫增厚 可转债策略悄然走红》2026-08-12（2026-07股票与量化指增普遍回撤时优美利可转债策略录得正收益；轮动选债约六成、T+0约四成；5-6月提高中低价债底充足个券占比）</td>
+<td><a href="https://www.stcn.com/article/detail/4070650.html" target="_blank" rel="noopener">https://www.stcn.com/article/detail/4070650.html</a></td>
+<td>2026-10-25</td>
+</tr>
+<tr>
+<td>[19]</td>
+<td>上海证券报·中国证券网《四家私募同日宣布自购 7月以来11家私募自购逾5亿元》2026-07-20（优美利投资自购旗下产品6111万元，属规模50亿以上私募）</td>
+<td><a href="http://www.cnstock.com/commonDetail/747865?commTag=true" target="_blank" rel="noopener">http://www.cnstock.com/commonDetail/747865?commTag=true</a></td>
+<td>2026-10-25</td>
+</tr>
+<tr>
+<td>[20]</td>
+<td>上海证券报（头条号转载）《优美利投资董事长贺金龙：以多资产策略在市场中长跑》2026-09-14（管理规模逾百亿；贺金龙"2008年起深耕券商行业，2014年在深圳创办优美利投资"）</td>
+<td><a href="http://m.toutiao.com/group/7685179457925022218/" target="_blank" rel="noopener">http://m.toutiao.com/group/7685179457925022218/</a></td>
+<td>2026-10-25</td>
+</tr>
+<tr>
+<td>[21]</td>
+<td>证券时报《股票私募仓位创新高，百亿私募加仓幅度居首！7月自购超14亿元》2026-08-04（截至7月30日25家私募自购14.29亿元，优美利自购6111万元位列前列；另财联社2026-07-22口径"不低于5000万元"）</td>
+<td><a href="https://www.stcn.com/article/detail/4057386.html" target="_blank" rel="noopener">https://www.stcn.com/article/detail/4057386.html</a></td>
+<td>2026-10-25</td>
+</tr>
+<tr>
+<td>[22]</td>
+<td>中信证券官网·托管服务（托管人职责含按约定频率进行净值复核与披露监督，估值/披露频率由基金合同约定——用于说明托管复核机制，非优美利特定信息）</td>
+<td><a href="http://fundservices.cs.ecitic.com/yyjjfa/zctgfw/" target="_blank" rel="noopener">http://fundservices.cs.ecitic.com/yyjjfa/zctgfw/</a></td>
+<td>2026-10-25</td>
+</tr>
+</tbody>
+</table>
+</div>
+</main>
+</div>
+<script>function f(){var q=document.getElementById("q").value.trim().toLowerCase();document.querySelectorAll("#list .it").forEach(function(e){var t=(e.getAttribute("data-n")||"").toLowerCase();e.style.display=(!q||t.indexOf(q)>=0)?"":"none";});}</script>
+</body>
+</html>

@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>纽达投资 · 私募档案</title>
+<style>
+:root{--bg:#1e2227;--surface:#262a30;--surface2:#2c3138;--line:#33383f;--line2:#3e444c;
+--ink:#e8eaed;--ink2:#b9bfc7;--muted:#8a929c;--brand:#e05a4e;--brand-d:#c75042;
+--brand-soft:#3a2623;--brand-line:#5a3530}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink2);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;font-size:14.5px}
+a{color:var(--brand-d);text-decoration:none}
+.topbar{position:sticky;top:0;z-index:10;display:flex;align-items:center;gap:14px;padding:11px 20px;background:var(--surface);border-bottom:1px solid var(--line)}
+.back{font-size:13px;color:var(--ink2);border:1px solid var(--line2);padding:5px 11px;border-radius:7px;background:var(--surface2)}
+.back:hover{color:#fff;border-color:var(--brand)}
+.crumb{font-weight:700;color:var(--ink)}
+.wrap{display:flex;min-height:calc(100vh - 49px)}
+.side{width:250px;flex:0 0 250px;border-right:1px solid var(--line);background:var(--surface2);display:flex;flex-direction:column;position:sticky;top:49px;height:calc(100vh - 49px)}
+.search{margin:12px;padding:8px 11px;border:1px solid var(--line2);border-radius:8px;background:var(--surface);color:var(--ink);font-size:13px;outline:none}
+.search:focus{border-color:var(--brand)}
+.list{flex:1;overflow-y:auto;padding:0 8px 14px}
+.it{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:7px 10px;border-radius:7px;cursor:pointer;font-size:13.5px;color:var(--ink2);margin:2px 0}
+.it:hover{background:var(--surface);color:var(--ink)}
+.it.on{background:var(--brand);color:#fff}
+.it.on .tier{color:rgba(255,255,255,.82)}
+.nm{font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tier{font-size:11px;color:var(--muted);flex-shrink:0}
+.main{flex:1;min-width:0;padding:26px 32px 48px}
+.title{font-size:26px;font-weight:800;color:var(--ink);letter-spacing:-.01em;margin:0}
+.full{font-size:13px;color:var(--muted);margin:6px 0 0}
+.badges{display:flex;flex-wrap:wrap;gap:6px;margin:14px 0 4px}
+.badge{font-size:12px;padding:3px 10px;border-radius:999px;background:var(--brand-soft);color:var(--brand-d);border:1px solid var(--brand-line);white-space:nowrap}
+.body{line-height:1.8;color:var(--ink2);font-size:14.5px;max-width:1000px}
+.body h2{font-size:19px;color:var(--ink);border-bottom:2px solid var(--line);padding-bottom:7px;margin:28px 0 14px}
+.body h3{font-size:17px;color:var(--ink);margin:22px 0 10px;border-left:3px solid var(--brand);padding-left:10px}
+.body h4{font-size:15px;color:var(--ink2);margin:16px 0 8px;font-weight:700}
+.body ul,.body ol{margin:8px 0 14px;padding-left:22px}
+.body li{margin:4px 0}
+.body li::marker{color:var(--brand)}
+.body blockquote{margin:10px 0;padding:10px 16px;background:var(--surface2);border-left:3px solid var(--brand);color:var(--ink2);border-radius:0 8px 8px 0}
+.body strong{color:var(--ink)}
+.body p{margin:8px 0}
+.body table{border-collapse:collapse;margin:14px 0;width:100%;font-size:13.5px;font-variant-numeric:tabular-nums}
+.body th,.body td{border:1px solid var(--line);padding:7px 12px;text-align:left}
+.body th{background:var(--surface2)}
+.body table.props td.pk{color:var(--ink);font-weight:600;white-space:nowrap;background:var(--surface2);width:200px}
+.body hr{border:none;border-top:1px solid var(--line);margin:20px 0}
+.body a{color:var(--brand-d)}
+.body code,.body pre{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:.9em;background:var(--surface2);padding:1px 5px;border-radius:4px}
+</style>
+</head>
+<body>
+<div class="topbar"><a class="back" href="../../index.html">← 返回查询页</a><span class="crumb">纽达投资</span></div>
+<div class="wrap">
+<aside class="side">
+<input class="search" id="q" placeholder="搜索公司 / 快速跳转…" oninput="f()">
+<div class="list" id="list">
+<a class="it" href="../%E5%90%8D%E7%A7%B0/" data-n="名称 全称"><span class="nm">名称</span><span class="tier">规模梯队</span></a><a class="it" href="../%E5%90%8D%E7%A7%B0/" data-n="名称 全称"><span class="nm">名称</span><span class="tier">规模梯队</span></a><a class="it" href="../%E4%B8%87%E6%9F%8F%E5%9F%BA%E9%87%91/" data-n="万柏基金 万柏私募基金管理有限公司"><span class="nm">万柏基金</span><span class="tier">20-50亿</span></a><a class="it" href="../%E4%B8%8A%E6%B5%B7%E5%88%A9%E5%B9%84%E7%A7%81%E5%8B%9F/" data-n="上海利幄私募 上海利幄私募基金管理有限公司"><span class="nm">上海利幄私募</span><span class="tier">50-100亿</span></a><a class="it" href="../%E4%B8%8A%E6%B5%B7%E6%9D%BE%E7%86%99%E7%A7%81%E5%8B%9F/" data-n="上海松熙私募 上海松熙私募基金管理合伙企业（有限合伙）"><span class="nm">上海松熙私募</span><span class="tier">100-200亿</span></a><a class="it" href="../%E4%B8%8A%E6%B5%B7%E8%BF%9C%E6%BE%9C/" data-n="上海远澜 上海远澜私募基金管理有限公司"><span class="nm">上海远澜</span><span class="tier">100-200亿</span></a><a class="it" href="../%E4%B8%8A%E6%B5%B7%E8%BF%9C%E8%A1%8C%E7%A7%81%E5%8B%9F/" data-n="上海远行私募 上海远行私募基金管理有限公司"><span class="nm">上海远行私募</span><span class="tier">50-100亿</span></a><a class="it" href="../%E4%B8%8A%E6%B5%B7%E9%B9%A4%E7%A6%A7%E7%A7%81%E5%8B%9F/" data-n="上海鹤禧私募 上海鹤禧私募基金管理有限公司"><span class="nm">上海鹤禧私募</span><span class="tier">20-50亿</span></a><a class="it" href="../%E4%B8%96%E7%BA%AA%E5%89%8D%E6%B2%BF/" data-n="世纪前沿 海南世纪前沿私募基金管理有限公司"><span class="nm">世纪前沿</span><span class="tier">500亿以上</span></a><a class="it" href="../%E4%B8%9C%E6%96%B9%E6%B8%AF%E6%B9%BE/" data-n="东方港湾 深圳东方港湾投资管理股份有限公司"><span class="nm">东方港湾</span><span class="tier">200-500亿</span></a><a class="it" href="../%E4%B8%AD%E6%AC%A7%E7%91%9E%E5%8D%9A/" data-n="中欧瑞博 深圳市中欧瑞博投资管理股份有限公司"><span class="nm">中欧瑞博</span><span class="tier">100-200亿</span></a><a class="it" href="../%E4%B8%AD%E9%87%91%E4%BC%97%E9%91%AB/" data-n="中金众鑫 北京中金众鑫投资管理有限公司"><span class="nm">中金众鑫</span><span class="tier">100-200亿</span></a><a class="it" href="../%E4%B9%85%E6%9C%9F%E6%8A%95%E8%B5%84/" data-n="久期投资 上海久期投资有限公司"><span class="nm">久期投资</span><span class="tier">100-200亿</span></a><a class="it" href="../%E4%B9%90%E7%91%9E%E8%B5%84%E4%BA%A7/" data-n="乐瑞资产 北京乐瑞资产管理有限公司"><span class="nm">乐瑞资产</span><span class="tier">100-200亿</span></a><a class="it" href="../%E4%B9%9D%E5%9D%A4/" data-n="九坤 九坤投资(北京)有限公司"><span class="nm">九坤</span><span class="tier">500亿以上</span></a><a class="it" href="../%E4%B9%BE%E7%9E%BB%E6%8A%95%E8%B5%84/" data-n="乾瞻投资 浙江乾瞻投资管理有限公司"><span class="nm">乾瞻投资</span><span class="tier">待核实</span></a><a class="it" href="../%E4%B9%BE%E8%B1%A1%E6%8A%95%E8%B5%84/" data-n="乾象投资 北京乾象私募基金管理有限公司"><span class="nm">乾象投资</span><span class="tier">100-200亿</span></a><a class="it" href="../%E4%BA%AC%E5%8D%8E%E4%B8%96%E5%AE%B6%E7%A7%81%E5%8B%9F/" data-n="京华世家私募 京华世家私募基金管理（北京）有限公司"><span class="nm">京华世家私募</span><span class="tier">100-200亿</span></a><a class="it" href="../%E4%BB%81%E6%A1%A5%E8%B5%84%E4%BA%A7/" data-n="仁桥资产 仁桥（北京）资产管理有限公司"><span class="nm">仁桥资产</span><span class="tier">100-200亿</span></a><a class="it" href="../%E4%BC%98%E7%BE%8E%E5%88%A9%E6%8A%95%E8%B5%84/" data-n="优美利投资 深圳市优美利投资管理有限公司"><span class="nm">优美利投资</span><span class="tier">50-100亿</span></a><a class="it" href="../%E4%BD%B3%E6%9C%9F%E6%8A%95%E8%B5%84/" data-n="佳期投资 上海佳期私募基金管理有限公司"><span class="nm">佳期投资</span><span class="tier">500亿以上</span></a><a class="it" href="../%E4%BF%A1%E5%BC%98%E5%A4%A9%E7%A6%BE/" data-n="信弘天禾 北京信弘天禾资产管理中心（有限合伙）"><span class="nm">信弘天禾</span><span class="tier">200-500亿</span></a><a class="it" href="../%E4%BF%A1%E7%92%9E%E6%8A%95%E8%B5%84/" data-n="信璞投资 上海信璞私募基金管理中心（有限合伙）"><span class="nm">信璞投资</span><span class="tier">20-50亿</span></a><a class="it" href="../%E5%80%8D%E6%BC%BE%E9%87%8F%E5%8C%96/" data-n="倍漾量化 南京倍漾私募基金管理有限公司"><span class="nm">倍漾量化</span><span class="tier">100-200亿</span></a><a class="it" href="../%E5%81%A5%E9%A1%BA%E6%8A%95%E8%B5%84/" data-n="健顺投资 上海健顺投资管理有限公司"><span class="nm">健顺投资</span><span class="tier">20-50亿</span></a><a class="it" href="../%E5%85%83%E5%BA%B7%E8%B5%84%E4%BA%A7/" data-n="元康资产 芜湖元康私募基金管理有限公司"><span class="nm">元康资产</span><span class="tier">50-100亿</span></a><a class="it" href="../%E5%86%B2%E7%A7%AF%E8%B5%84%E4%BA%A7/" data-n="冲积资产 上海冲积资产管理中心（有限合伙）"><span class="nm">冲积资产</span><span class="tier">50-100亿</span></a><a class="it" href="../%E5%87%AF%E8%AF%BB%E6%8A%95%E8%B5%84/" data-n="凯读投资 北京凯读私募基金管理有限公司"><span class="nm">凯读投资</span><span class="tier">100-200亿</span></a><a class="it" href="../%E5%88%A9%E4%BD%8D%E6%8A%95%E8%B5%84/" data-n="利位投资 上海利位私募基金管理有限公司"><span class="nm">利位投资</span><span class="tier">待核实</span></a><a class="it" href="../%E5%8B%A4%E8%BE%B0%E8%B5%84%E4%BA%A7/" data-n="勤辰资产 上海勤辰私募基金管理合伙企业（有限合伙）"><span class="nm">勤辰资产</span><span class="tier">100-200亿</span></a><a class="it" href="../%E5%8D%83%E6%83%A0%E8%B5%84%E6%9C%AC/" data-n="千惠资本 深圳前海千惠资产管理有限公司"><span class="nm">千惠资本</span><span class="tier">50-100亿</span></a><a class="it" href="../%E5%8D%83%E6%9C%94%E6%8A%95%E8%B5%84/" data-n="千朔投资 上海千朔投资管理有限公司"><span class="nm">千朔投资</span><span class="tier">100-200亿</span></a><a class="it" href="../%E5%8D%83%E8%B1%A1%E8%B5%84%E4%BA%A7/" data-n="千象资产 上海千象资产管理有限公司"><span class="nm">千象资产</span><span class="tier">待核实</span></a><a class="it" href="../%E5%8D%8A%E9%9E%85%E7%A7%81%E5%8B%9F/" data-n="半鞅私募 上海半鞅私募基金管理合伙企业（有限合伙）"><span class="nm">半鞅私募</span><span class="tier">100-200亿</span></a><a class="it" href="../%E5%8D%8E%E5%B9%B4%E7%A7%81%E5%8B%9F/" data-n="华年私募 上海华年私募基金管理有限公司"><span class="nm">华年私募</span><span class="tier">100-200亿</span></a><a class="it" href="../%E5%8D%93%E8%AF%86%E5%9F%BA%E9%87%91/" data-n="卓识基金 北京卓识私募基金管理有限公司"><span class="nm">卓识基金</span><span class="tier">100-200亿</span></a><a class="it" href="../%E5%8D%97%E5%9C%9F%E8%B5%84%E4%BA%A7/" data-n="南土资产 上海南土资产管理有限公司"><span class="nm">南土资产</span><span class="tier">20-50亿</span></a><a class="it" href="../%E5%8D%9A%E6%99%AE%E7%A7%91%E6%8A%80/" data-n="博普科技 深圳博普科技有限公司"><span class="nm">博普科技</span><span class="tier">50-100亿</span></a><a class="it" href="../%E5%90%88%E6%99%9F%E8%B5%84%E4%BA%A7/" data-n="合晟资产 上海合晟资产管理股份有限公司"><span class="nm">合晟资产</span><span class="tier">100-200亿</span></a><a class="it" href="../%E5%90%88%E9%AA%A5%E7%A7%81%E5%8B%9F/" data-n="合骥私募 上海合骥私募基金管理有限公司"><span class="nm">合骥私募</span><span class="tier">100-200亿</span></a><a class="it" href="../%E5%90%9B%E4%B9%8B%E5%81%A5%E6%8A%95%E8%B5%84/" data-n="君之健投资 广东君之健投资管理有限公司"><span class="nm">君之健投资</span><span class="tier">100-200亿</span></a><a class="it" href="../%E5%90%AF%E6%9E%97%E6%8A%95%E8%B5%84/" data-n="启林投资 上海启林投资管理有限公司"><span class="nm">启林投资</span><span class="tier">100-200亿</span></a><a class="it" href="../%E5%9B%A0%E8%AF%BA%E8%B5%84%E4%BA%A7/" data-n="因诺资产 因诺（上海）资产管理有限公司"><span class="nm">因诺资产</span><span class="tier">100-200亿</span></a><a class="it" href="../%E5%9B%BE%E7%81%B5%E5%9F%BA%E9%87%91/" data-n="图灵基金 图灵私募基金管理（海南）有限公司"><span class="nm">图灵基金</span><span class="tier">100-200亿</span></a><a class="it" href="../%E5%A4%8D%E8%83%9C%E8%B5%84%E4%BA%A7/" data-n="复胜资产 上海复胜资产管理合伙企业（有限合伙）"><span class="nm">复胜资产</span><span class="tier">100-200亿</span></a><a class="it" href="../%E5%A4%A7%E6%9C%B4%E8%B5%84%E4%BA%A7/" data-n="大朴资产 上海大朴资产管理有限公司"><span class="nm">大朴资产</span><span class="tier">100-200亿</span></a><a class="it" href="../%E5%A4%A9%E6%BC%94%E8%B5%84%E6%9C%AC/" data-n="天演资本 上海天演私募基金管理有限公司"><span class="nm">天演资本</span><span class="tier">200-500亿</span></a><a class="it" href="../%E5%A4%A9%E7%AE%97%E9%87%8F%E5%8C%96/" data-n="天算量化 天算量化（北京）资本管理有限公司"><span class="nm">天算量化</span><span class="tier">50-100亿</span></a><a class="it" href="../%E5%A7%9A%E6%B3%BE%E6%B2%B3%E7%A7%81%E5%8B%9F/" data-n="姚泾河私募 上海姚泾河私募基金管理有限公司"><span class="nm">姚泾河私募</span><span class="tier">100-200亿</span></a><a class="it" href="../%E5%AD%90%E5%8D%88%E6%8A%95%E8%B5%84/" data-n="子午投资 上海子午投资管理有限公司"><span class="nm">子午投资</span><span class="tier">100-200亿</span></a><a class="it" href="../%E5%AE%81%E6%B3%89%E8%B5%84%E4%BA%A7/" data-n="宁泉资产 上海宁泉资产管理有限公司"><span class="nm">宁泉资产</span><span class="tier">200-500亿</span></a><a class="it" href="../%E5%AE%89%E8%B4%A4%E6%8A%95%E8%B5%84/" data-n="安贤投资 北京安贤私募基金管理有限公司"><span class="nm">安贤投资</span><span class="tier">100-200亿</span></a><a class="it" href="../%E5%AE%8F%E9%94%A1%E5%9F%BA%E9%87%91/" data-n="宏锡基金 广东宏锡基金管理有限公司"><span class="nm">宏锡基金</span><span class="tier">50-100亿</span></a><a class="it" href="../%E5%AE%BD%E5%BE%B7%E6%8A%95%E8%B5%84/" data-n="宽德投资 上海宽德私募基金管理中心（有限合伙）"><span class="nm">宽德投资</span><span class="tier">200-500亿</span></a><a class="it" href="../%E5%AE%BD%E6%8A%95%E8%B5%84%E4%BA%A7/" data-n="宽投资产 上海宽投资产管理有限公司"><span class="nm">宽投资产</span><span class="tier">100-200亿</span></a><a class="it" href="../%E5%B0%91%E8%96%AE%E6%B4%BE%E6%8A%95%E8%B5%84/" data-n="少薮派投资 上海少薮派投资管理有限公司"><span class="nm">少薮派投资</span><span class="tier">50-100亿</span></a><a class="it" href="../%E5%B1%95%E5%BC%98%E6%8A%95%E8%B5%84/" data-n="展弘投资 上海展弘投资管理有限公司"><span class="nm">展弘投资</span><span class="tier">200-500亿</span></a><a class="it" href="../%E5%B2%9A%E6%B9%96%E5%9F%BA%E9%87%91/" data-n="岚湖基金 海南岚湖私募基金管理有限公司"><span class="nm">岚湖基金</span><span class="tier">100-200亿</span></a><a class="it" href="../%E5%B8%8C%E7%93%A6%E8%B5%84%E4%BA%A7/" data-n="希瓦资产 海南希瓦私募基金管理有限责任公司"><span class="nm">希瓦资产</span><span class="tier">100-200亿</span></a><a class="it" href="../%E5%B8%B8%E6%98%A5%E8%97%A4%E8%B5%84%E4%BA%A7/" data-n="常春藤资产 上海常春藤私募基金管理有限公司"><span class="nm">常春藤资产</span><span class="tier">100-200亿</span></a><a class="it" href="../%E5%B9%B3%E6%96%B9%E5%92%8C%E6%8A%95%E8%B5%84/" data-n="平方和投资 宁波平方和投资管理合伙企业（有限合伙）"><span class="nm">平方和投资</span><span class="tier">500亿以上</span></a><a class="it" href="../%E5%B9%BB%E6%96%B9%E9%87%8F%E5%8C%96/" data-n="幻方量化 宁波幻方量化投资管理合伙企业(有限合伙)"><span class="nm">幻方量化</span><span class="tier">500亿以上</span></a><a class="it" href="../%E5%BC%80%E6%80%9D%E7%A7%81%E5%8B%9F/" data-n="开思私募 上海开思私募基金管理有限公司"><span class="nm">开思私募</span><span class="tier">100-200亿</span></a><a class="it" href="../%E5%BE%AE%E8%A7%82%E5%8D%9A%E6%98%93/" data-n="微观博易 北京微观博易私募基金管理有限公司"><span class="nm">微观博易</span><span class="tier">100-200亿</span></a><a class="it" href="../%E5%BE%B7%E8%B4%9D%E5%9F%BA%E9%87%91/" data-n="德贝基金 上海德贝私募基金管理有限公司"><span class="nm">德贝基金</span><span class="tier">100-200亿</span></a><a class="it" href="../%E5%BF%B5%E7%A9%BA%E5%BF%B5%E8%A7%89/" data-n="念空念觉 上海念觉私募基金管理有限公司"><span class="nm">念空念觉</span><span class="tier">200-500亿</span></a><a class="it" href="../%E6%80%9D%E5%8B%B0%E6%8A%95%E8%B5%84/" data-n="思勰投资 上海思勰投资管理有限公司"><span class="nm">思勰投资</span><span class="tier">100-200亿</span></a><a class="it" href="../%E6%82%A6%E6%B5%B7%E7%9B%88%E5%92%8C/" data-n="悦海盈和 北京悦海盈和私募基金管理有限公司"><span class="nm">悦海盈和</span><span class="tier">50-100亿</span></a><a class="it" href="../%E6%85%8E%E7%9F%A5%E8%B5%84%E4%BA%A7/" data-n="慎知资产 上海慎知资产管理合伙企业（有限合伙）"><span class="nm">慎知资产</span><span class="tier">100-200亿</span></a><a class="it" href="../%E6%89%98%E7%89%B9%E7%A7%81%E5%8B%9F/" data-n="托特私募 托特(三亚)私募基金管理有限公司"><span class="nm">托特私募</span><span class="tier">100-200亿</span></a><a class="it" href="../%E6%8B%BE%E8%B4%9D%E6%8A%95%E8%B5%84/" data-n="拾贝投资 上海拾贝能信私募基金管理合伙企业（有限合伙）"><span class="nm">拾贝投资</span><span class="tier">50-100亿</span></a><a class="it" href="../%E6%95%A6%E5%92%8C%E8%B5%84%E7%AE%A1/" data-n="敦和资管 敦和资产管理有限公司"><span class="nm">敦和资管</span><span class="tier">200-500亿</span></a><a class="it" href="../%E6%97%8C%E5%AE%89%E8%B5%84%E4%BA%A7/" data-n="旌安资产 浙江旌安私募基金有限公司"><span class="nm">旌安资产</span><span class="tier">100-200亿</span></a><a class="it" href="../%E6%98%8E%E6%B1%AF%E6%8A%95%E8%B5%84/" data-n="明汯投资 上海明汯投资管理有限公司"><span class="nm">明汯投资</span><span class="tier">500亿以上</span></a><a class="it" href="../%E6%98%9F%E7%9F%B3%E6%8A%95%E8%B5%84/" data-n="星石投资 北京市星石投资管理有限公司"><span class="nm">星石投资</span><span class="tier">100-200亿</span></a><a class="it" href="../%E6%99%AF%E6%9E%97%E8%B5%84%E4%BA%A7/" data-n="景林资产 上海景林资产管理有限公司"><span class="nm">景林资产</span><span class="tier">500亿以上</span></a><a class="it" href="../%E6%9C%8B%E9%94%A6%E4%BB%B2%E9%98%B3/" data-n="朋锦仲阳 成都朋锦仲阳投资管理中心(有限合伙)"><span class="nm">朋锦仲阳</span><span class="tier">100-200亿</span></a><a class="it" href="../%E6%9C%9B%E6%AD%A3%E8%B5%84%E4%BA%A7/" data-n="望正资产 深圳望正资产管理有限公司"><span class="nm">望正资产</span><span class="tier">100-200亿</span></a><a class="it" href="../%E6%9E%97%E5%9B%AD%E6%8A%95%E8%B5%84/" data-n="林园投资 深圳市林园投资管理有限责任公司"><span class="nm">林园投资</span><span class="tier">200-500亿</span></a><a class="it" href="../%E6%AD%A3%E5%AE%9A%E7%A7%81%E5%8B%9F/" data-n="正定私募 北京正定私募基金管理合伙企业（有限合伙）"><span class="nm">正定私募</span><span class="tier">200-500亿</span></a><a class="it" href="../%E6%AD%A3%E7%80%9B%E8%B5%84%E4%BA%A7/" data-n="正瀛资产 上海正瀛资产管理有限公司"><span class="nm">正瀛资产</span><span class="tier">200-500亿</span></a><a class="it" href="../%E6%B0%B4%E7%92%9E%E5%9F%BA%E9%87%91/" data-n="水璞基金 上海水璞私募基金管理中心（有限合伙）"><span class="nm">水璞基金</span><span class="tier">100-200亿</span></a><a class="it" href="../%E6%B1%9F%E9%98%B4%E7%B1%B3%E5%88%A9%E9%83%BD%E7%A7%81%E5%8B%9F/" data-n="江阴米利都私募 江阴米利都私募基金管理合伙企业（有限合伙）"><span class="nm">江阴米利都私募</span><span class="tier">待核实</span></a><a class="it" href="../%E6%B3%93%E6%BE%84%E6%8A%95%E8%B5%84/" data-n="泓澄投资 北京泓澄投资管理有限公司"><span class="nm">泓澄投资</span><span class="tier">100-200亿</span></a><a class="it" href="../%E6%B4%9B%E4%B9%A6%E6%8A%95%E8%B5%84/" data-n="洛书投资 上海洛书投资管理有限公司"><span class="nm">洛书投资</span><span class="tier">100-200亿</span></a><a class="it" href="../%E6%B5%B7%E5%8D%97%E7%9B%9B%E4%B8%B0%E7%A7%81%E5%8B%9F/" data-n="海南盛丰私募 海南盛丰私募基金管理有限公司"><span class="nm">海南盛丰私募</span><span class="tier">100-200亿</span></a><a class="it" href="../%E6%B6%B5%E5%BE%B7%E6%8A%95%E8%B5%84/" data-n="涵德投资 北京涵德投资管理有限公司"><span class="nm">涵德投资</span><span class="tier">50-100亿</span></a><a class="it" href="../%E6%B7%A1%E6%B0%B4%E6%B3%89/" data-n="淡水泉 淡水泉（北京）投资管理有限公司"><span class="nm">淡水泉</span><span class="tier">200-500亿</span></a><a class="it" href="../%E6%B8%85%E5%92%8C%E6%B3%89%E8%B5%84%E6%9C%AC/" data-n="清和泉资本 北京清和泉资本管理有限公司"><span class="nm">清和泉资本</span><span class="tier">10-20亿</span></a><a class="it" href="../%E6%BA%90%E4%B9%90%E6%99%9F/" data-n="源乐晟 西藏源乐晟资产管理有限公司"><span class="nm">源乐晟</span><span class="tier">100-200亿</span></a><a class="it" href="../%E7%81%B5%E5%9D%87%E6%8A%95%E8%B5%84/" data-n="灵均投资 宁波灵均投资管理合伙企业（有限合伙）"><span class="nm">灵均投资</span><span class="tier">500亿以上</span></a><a class="it" href="../%E7%94%B3%E6%AF%85%E6%8A%95%E8%B5%84/" data-n="申毅投资 上海申毅投资股份有限公司"><span class="nm">申毅投资</span><span class="tier">100-200亿</span></a><a class="it" href="../%E7%9B%98%E4%BA%AC%E6%8A%95%E8%B5%84/" data-n="盘京投资 上海盘京投资管理中心（有限合伙）"><span class="nm">盘京投资</span><span class="tier">200-500亿</span></a><a class="it" href="../%E7%9D%BF%E9%83%A1%E8%B5%84%E4%BA%A7/" data-n="睿郡资产 上海睿郡资产管理有限公司"><span class="nm">睿郡资产</span><span class="tier">200-500亿</span></a><a class="it" href="../%E7%9D%BF%E9%87%8F%E7%A7%81%E5%8B%9F/" data-n="睿量私募 上海睿量私募基金管理有限公司"><span class="nm">睿量私募</span><span class="tier">50-100亿</span></a><a class="it" href="../%E7%9F%A5%E8%A1%8C%E9%80%9A%E8%BE%BE/" data-n="知行通达 深圳知行通达私募证券基金管理合伙企业（有限合伙）"><span class="nm">知行通达</span><span class="tier">待核实</span></a><a class="it" href="../%E7%A3%90%E6%9D%BE%E8%B5%84%E4%BA%A7/" data-n="磐松资产 上海磐松私募基金管理有限公司"><span class="nm">磐松资产</span><span class="tier">100-200亿</span></a><a class="it" href="../%E7%A3%90%E6%B3%BD%E8%B5%84%E4%BA%A7/" data-n="磐泽资产 北京磐泽资产管理有限公司"><span class="nm">磐泽资产</span><span class="tier">100-200亿</span></a><a class="it" href="../%E7%A6%85%E9%BE%99%E8%B5%84%E4%BA%A7/" data-n="禅龙资产 上海禅龙资产管理有限公司"><span class="nm">禅龙资产</span><span class="tier">50-100亿</span></a><a class="it" href="../%E7%A8%B3%E5%8D%9A%E6%8A%95%E8%B5%84/" data-n="稳博投资 上海稳博投资管理有限公司"><span class="nm">稳博投资</span><span class="tier">200-500亿</span></a><a class="it" href="../%E7%BA%A2%E7%AD%B9%E6%8A%95%E8%B5%84/" data-n="红筹投资 深圳市红筹投资有限公司"><span class="nm">红筹投资</span><span class="tier">100-200亿</span></a><a class="it on" href="../%E7%BA%BD%E8%BE%BE%E6%8A%95%E8%B5%84/" data-n="纽达投资 珠海纽达投资管理有限公司"><span class="nm">纽达投资</span><span class="tier">100-200亿</span></a><a class="it" href="../%E8%81%9A%E9%B8%A3%E6%8A%95%E8%B5%84/" data-n="聚鸣投资 上海聚鸣投资管理有限公司"><span class="nm">聚鸣投资</span><span class="tier">100-200亿</span></a><a class="it" href="../%E8%85%BE%E8%83%9C%E6%8A%95%E8%B5%84/" data-n="腾胜投资 腾胜投资管理（上海）有限公司"><span class="nm">腾胜投资</span><span class="tier">100-200亿</span></a><a class="it" href="../%E8%87%B4%E8%AF%9A%E5%8D%93%E8%BF%9C/" data-n="致诚卓远 致诚卓远(珠海)投资管理合伙企业(有限合伙)"><span class="nm">致诚卓远</span><span class="tier">100-200亿</span></a><a class="it" href="../%E8%8C%82%E6%BA%90%E9%87%8F%E5%8C%96/" data-n="茂源量化 茂源量化（海南）私募基金管理合伙企业（有限合伙）"><span class="nm">茂源量化</span><span class="tier">200-500亿</span></a><a class="it" href="../%E8%92%99%E7%8E%BA%E6%8A%95%E8%B5%84/" data-n="蒙玺投资 上海蒙玺投资管理有限公司"><span class="nm">蒙玺投资</span><span class="tier">200-500亿</span></a><a class="it" href="../%E8%A1%8D%E5%A4%8D/" data-n="衍复 上海衍复投资管理有限公司"><span class="nm">衍复</span><span class="tier">500亿以上</span></a><a class="it" href="../%E8%AF%9A%E5%A5%87%E8%B5%84%E4%BA%A7/" data-n="诚奇资产 上海诚奇私募基金管理有限公司"><span class="nm">诚奇资产</span><span class="tier">500亿以上</span></a><a class="it" href="../%E8%AF%9A%E6%97%B8%E6%8A%95%E8%B5%84/" data-n="诚旸投资 北京诚旸投资有限公司"><span class="nm">诚旸投资</span><span class="tier">500亿以上</span></a><a class="it" href="../%E8%B5%AB%E5%AF%8C%E6%8A%95%E8%B5%84/" data-n="赫富投资 上海赫富投资有限公司"><span class="nm">赫富投资</span><span class="tier">100-200亿</span></a><a class="it" href="../%E8%BF%9B%E5%8C%96%E8%AE%BA%E8%B5%84%E4%BA%A7/" data-n="进化论资产 海南进化论私募基金管理有限公司"><span class="nm">进化论资产</span><span class="tier">200-500亿</span></a><a class="it" href="../%E8%BF%9C%E5%92%8C%E8%B5%84%E4%BA%A7/" data-n="远和资产 杭州远和私募基金有限公司"><span class="nm">远和资产</span><span class="tier">100-200亿</span></a><a class="it" href="../%E9%87%8D%E9%98%B3%E6%8A%95%E8%B5%84/" data-n="重阳投资 上海重阳投资管理股份有限公司"><span class="nm">重阳投资</span><span class="tier">200-500亿</span></a><a class="it" href="../%E9%87%8F%E6%B4%BE%E6%8A%95%E8%B5%84/" data-n="量派投资 上海量派投资管理有限公司"><span class="nm">量派投资</span><span class="tier">200-500亿</span></a><a class="it" href="../%E9%87%8F%E9%81%93%E6%8A%95%E8%B5%84/" data-n="量道投资 深圳量道投资管理有限公司"><span class="nm">量道投资</span><span class="tier">100-200亿</span></a><a class="it" href="../%E9%87%8F%E9%AD%81%E7%A7%81%E5%8B%9F/" data-n="量魁私募 上海量魁私募基金管理有限公司"><span class="nm">量魁私募</span><span class="tier">100-200亿</span></a><a class="it" href="../%E9%87%91%E6%88%88%E9%87%8F%E9%94%90/" data-n="金戈量锐 宁波金戈量锐资产管理有限公司"><span class="nm">金戈量锐</span><span class="tier">100-200亿</span></a><a class="it" href="../%E9%93%B6%E5%8F%B6%E6%8A%95%E8%B5%84/" data-n="银叶投资 上海银叶投资有限公司"><span class="nm">银叶投资</span><span class="tier">200-500亿</span></a><a class="it" href="../%E9%94%90%E5%A4%A9%E6%8A%95%E8%B5%84/" data-n="锐天投资 上海锐天投资管理有限公司"><span class="nm">锐天投资</span><span class="tier">50-100亿</span></a><a class="it" href="../%E9%A1%BD%E5%B2%A9%E8%B5%84%E4%BA%A7/" data-n="顽岩资产 上海顽岩私募基金管理有限公司"><span class="nm">顽岩资产</span><span class="tier">500亿以上</span></a><a class="it" href="../%E9%AB%98%E6%AF%85%E8%B5%84%E4%BA%A7/" data-n="高毅资产 上海高毅资产管理合伙企业（有限合伙）"><span class="nm">高毅资产</span><span class="tier">500亿以上</span></a><a class="it" href="../%E9%B2%81%E6%B0%91%E6%8A%95/" data-n="鲁民投 鲁民投基金管理有限公司"><span class="nm">鲁民投</span><span class="tier">100-200亿</span></a><a class="it" href="../%E9%B8%A3%E7%86%99%E8%B5%84%E6%9C%AC/" data-n="鸣熙资本 上海鸣熙资产管理有限公司"><span class="nm">鸣熙资本</span><span class="tier">100-200亿</span></a><a class="it" href="../%E9%B8%A3%E7%9F%B3%E5%9F%BA%E9%87%91/" data-n="鸣石基金 上海鸣石私募基金管理有限公司"><span class="nm">鸣石基金</span><span class="tier">500亿以上</span></a><a class="it" href="../%E9%BB%91%E7%BF%BC%E8%B5%84%E4%BA%A7/" data-n="黑翼资产 上海黑翼资产管理有限公司"><span class="nm">黑翼资产</span><span class="tier">500亿以上</span></a><a class="it" href="../%E9%BD%90%E5%AE%B6%E7%A7%81%E5%8B%9F/" data-n="齐家私募 齐家私募基金管理(海南)有限公司"><span class="nm">齐家私募</span><span class="tier">100-200亿</span></a><a class="it" href="../%E9%BE%99%E6%97%97%E7%A7%91%E6%8A%80/" data-n="龙旗科技 杭州龙旗科技有限公司"><span class="nm">龙旗科技</span><span class="tier">500亿以上</span></a><a class="it" href="../%E8%B6%A3%E6%97%B6%E8%B5%84%E4%BA%A7/" data-n="趣时资产 上海趣时资产管理有限公司"><span class="nm">趣时资产</span><span class="tier">50-100亿</span></a><a class="it" href="../%E6%89%BF%E5%A3%B9%E7%A7%81%E5%8B%9F/" data-n="承壹私募 上海承壹私募基金管理有限公司"><span class="nm">承壹私募</span><span class="tier">20-50亿</span></a><a class="it" href="../%E5%AE%BD%E8%BF%9C%E8%B5%84%E4%BA%A7/" data-n="宽远资产 上海宽远资产管理有限公司"><span class="nm">宽远资产</span><span class="tier">50-100亿</span></a><a class="it" href="../%E4%B8%8A%E6%B5%B7%E4%BF%9D%E9%93%B6%E7%A7%81%E5%8B%9F/" data-n="上海保银私募 上海保银私募基金管理有限公司"><span class="nm">上海保银私募</span><span class="tier">50-100亿</span></a><a class="it" href="../%E5%90%88%E8%BF%9C%E7%A7%81%E5%8B%9F/" data-n="合远私募 上海合远私募基金管理有限公司"><span class="nm">合远私募</span><span class="tier">50-100亿</span></a><a class="it" href="../%E5%90%8C%E7%8A%87%E6%8A%95%E8%B5%84/" data-n="同犇投资 上海同犇投资管理中心(有限合伙)"><span class="nm">同犇投资</span><span class="tier">20-50亿</span></a><a class="it" href="../%E6%B0%B8%E5%AE%89%E5%9B%BD%E5%AF%8C/" data-n="永安国富 永安国富资产管理有限公司"><span class="nm">永安国富</span><span class="tier">50-100亿</span></a><a class="it" href="../%E5%BA%B7%E6%9B%BC%E5%BE%B7%E8%B5%84%E6%9C%AC/" data-n="康曼德资本 深圳市康曼德资本管理有限公司"><span class="nm">康曼德资本</span><span class="tier">50-100亿</span></a><a class="it" href="../%E7%9B%B8%E8%81%9A%E8%B5%84%E6%9C%AC/" data-n="相聚资本 相聚资本管理有限公司"><span class="nm">相聚资本</span><span class="tier">50-100亿</span></a><a class="it" href="../%E6%B1%89%E5%92%8C%E8%B5%84%E6%9C%AC/" data-n="汉和资本 北京汉和汉华资本管理有限公司"><span class="nm">汉和资本</span><span class="tier">50-100亿</span></a><a class="it" href="../%E7%A6%A7%E6%82%A6%E7%A7%81%E5%8B%9F/" data-n="禧悦私募 北京禧悦私募基金管理有限公司(曾用名:北京禧悦投资管理有限公司)"><span class="nm">禧悦私募</span><span class="tier">50-100亿</span></a><a class="it" href="../%E6%81%92%E9%82%A6%E5%85%86%E4%B8%B0/" data-n="恒邦兆丰 深圳市恒邦兆丰私募证券基金管理有限公司(曾用名:深圳市前海恒邦兆丰资产管理有限公司)"><span class="nm">恒邦兆丰</span><span class="tier">50-100亿</span></a><a class="it" href="../%E5%A3%B9%E7%82%B9%E7%BA%B3%E9%94%A6%E7%A7%81%E5%8B%9F/" data-n="壹点纳锦私募 壹点纳锦(泉州)私募基金管理有限公司(曾用名:晋江壹点纳锦资产管理有限公司)"><span class="nm">壹点纳锦私募</span><span class="tier">50-100亿</span></a><a class="it" href="../%E7%9B%9B%E9%BA%92%E8%B5%84%E4%BA%A7/" data-n="盛麒资产 宁波梅山保税港区盛麒资产管理有限公司"><span class="nm">盛麒资产</span><span class="tier">20-50亿</span></a><a class="it" href="../%E5%96%9C%E4%B8%96%E6%B6%A6/" data-n="喜世润 上海喜世润投资管理有限公司"><span class="nm">喜世润</span><span class="tier">20-50亿</span></a><a class="it" href="../%E6%98%93%E5%90%8C%E6%8A%95%E8%B5%84/" data-n="易同投资 深圳市易同投资有限公司"><span class="nm">易同投资</span><span class="tier">10-20亿</span></a><a class="it" href="../%E9%87%91%E7%BF%BC%E5%9F%BA%E9%87%91/" data-n="金翼基金 金翼私募基金管理(珠海横琴)有限公司"><span class="nm">金翼基金</span><span class="tier">10-20亿</span></a><a class="it" href="../%E6%B2%A3%E4%BA%AC%E8%B5%84%E6%9C%AC/" data-n="沣京资本 沣京资本管理(北京)有限公司"><span class="nm">沣京资本</span><span class="tier">50-100亿</span></a><a class="it" href="../%E8%89%BE%E6%96%B9%E8%B5%84%E4%BA%A7/" data-n="艾方资产 上海艾方资产管理有限公司"><span class="nm">艾方资产</span><span class="tier">50-100亿</span></a><a class="it" href="../%E5%91%88%E7%91%9E%E6%8A%95%E8%B5%84/" data-n="呈瑞投资 上海呈瑞投资管理有限公司"><span class="nm">呈瑞投资</span><span class="tier">50-100亿</span></a><a class="it" href="../%E5%98%89%E7%9F%B3%E5%A4%A7%E5%B2%A9/" data-n="嘉石大岩 珠海嘉石大岩私募证券基金管理有限公司"><span class="nm">嘉石大岩</span><span class="tier">100-200亿</span></a><a class="it" href="../%E7%BF%B0%E8%8D%A3%E6%8A%95%E8%B5%84/" data-n="翰荣投资 深圳翰荣私募证券基金管理有限公司(曾用名:深圳翰荣投资管理有限公司)"><span class="nm">翰荣投资</span><span class="tier">50-100亿</span></a><a class="it" href="../%E4%BC%9A%E4%B8%96%E8%B5%84%E4%BA%A7/" data-n="会世资产 上海会世私募基金管理有限公司"><span class="nm">会世资产</span><span class="tier">50-100亿</span></a><a class="it" href="../%E5%9D%A4%E6%9C%9B%E5%9F%BA%E9%87%91/" data-n="坤望基金 上海坤望私募基金管理有限公司"><span class="nm">坤望基金</span><span class="tier">20-50亿</span></a><a class="it" href="../%E9%87%8F%E7%9B%88%E6%8A%95%E8%B5%84/" data-n="量盈投资 浙江量盈投资管理有限公司"><span class="nm">量盈投资</span><span class="tier">50-100亿</span></a><a class="it" href="../%E6%80%9D%E6%99%94%E6%8A%95%E8%B5%84/" data-n="思晔投资 上海思晔投资管理有限公司"><span class="nm">思晔投资</span><span class="tier">50-100亿</span></a><a class="it" href="../%E8%B1%A1%E9%99%90%E8%B5%84%E4%BA%A7/" data-n="象限资产 上海象限资产管理有限公司"><span class="nm">象限资产</span><span class="tier">50-100亿</span></a><a class="it" href="../%E4%BA%91%E8%B5%B7%E9%87%8F%E5%8C%96/" data-n="云起量化 宁波云起私募基金管理有限公司"><span class="nm">云起量化</span><span class="tier">50-100亿</span></a><a class="it" href="../%E5%BE%B7%E5%8A%AD%E6%8A%95%E8%B5%84/" data-n="德劭投资 德劭投资管理(上海)有限公司"><span class="nm">德劭投资</span><span class="tier">50-100亿</span></a><a class="it" href="../%E4%BA%A6%E8%B5%8B%E9%87%8F%E5%8C%96/" data-n="亦赋量化 亦赋私募基金管理(海南)有限公司"><span class="nm">亦赋量化</span><span class="tier">50-100亿</span></a><a class="it" href="../%E5%9D%87%E6%88%90%E8%B5%84%E4%BA%A7/" data-n="均成资产 广东横琴均成私募基金管理有限公司"><span class="nm">均成资产</span><span class="tier">50-100亿</span></a><a class="it" href="../%E5%AD%9D%E5%BA%B8%E7%A7%81%E5%8B%9F/" data-n="孝庸私募 上海孝庸私募基金管理有限公司"><span class="nm">孝庸私募</span><span class="tier">100-200亿</span></a><a class="it" href="../%E9%93%AD%E8%B7%83%E7%A7%81%E5%8B%9F/" data-n="铭跃私募 上海铭跃私募基金管理合伙企业(有限合伙)"><span class="nm">铭跃私募</span><span class="tier">20-50亿</span></a><a class="it" href="../%E5%80%8D%E8%87%B4%E7%A7%81%E5%8B%9F/" data-n="倍致私募 杭州倍致私募基金管理有限公司"><span class="nm">倍致私募</span><span class="tier">50-100亿</span></a><a class="it" href="../%E8%A1%8D%E5%90%88%E7%A7%81%E5%8B%9F/" data-n="衍合私募 上海衍合私募基金管理有限公司"><span class="nm">衍合私募</span><span class="tier">20-50亿</span></a><a class="it" href="../%E7%BB%86%E6%B0%B4%E8%B5%84%E6%9C%AC/" data-n="细水资本 成都细水资产管理有限公司"><span class="nm">细水资本</span><span class="tier">20-50亿</span></a><a class="it" href="../%E7%8E%84%E4%BF%A1%E8%B5%84%E4%BA%A7/" data-n="玄信资产 上海玄信资产管理中心(有限合伙)"><span class="nm">玄信资产</span><span class="tier">50-100亿</span></a><a class="it" href="../%E5%98%89%E6%87%BF%E8%90%83%E7%A7%81%E5%8B%9F/" data-n="嘉懿萃私募 上海嘉懿萃私募基金管理有限公司"><span class="nm">嘉懿萃私募</span><span class="tier">待核实</span></a><a class="it" href="../%E8%A1%8D%E7%9B%9B%E8%B5%84%E4%BA%A7/" data-n="衍盛资产 衍盛私募证券投资基金管理(深圳)有限公司"><span class="nm">衍盛资产</span><span class="tier">20-50亿</span></a><a class="it" href="../%E6%A9%A1%E6%9C%A8%E8%B5%84%E4%BA%A7/" data-n="橡木资产 杭州橡木私募基金管理有限公司"><span class="nm">橡木资产</span><span class="tier">20-50亿</span></a><a class="it" href="../%E6%AD%A3%E4%BB%81%E9%87%8F%E5%8C%96/" data-n="正仁量化 海南正仁量化私募基金管理有限公司"><span class="nm">正仁量化</span><span class="tier">待核实</span></a><a class="it" href="../%E5%87%8C%E9%A1%B6%E6%8A%95%E8%B5%84/" data-n="凌顶投资 宁波梅山保税港区凌顶投资管理有限公司"><span class="nm">凌顶投资</span><span class="tier">100-200亿</span></a><a class="it" href="../%E9%92%B1%E5%94%90%E6%B0%B8%E5%88%A9/" data-n="钱唐永利 浙江钱唐永利资产管理有限公司"><span class="nm">钱唐永利</span><span class="tier">50-100亿</span></a><a class="it" href="../%E6%9A%96%E6%B5%81%E8%B5%84%E4%BA%A7/" data-n="暖流资产 暖流资产管理股份有限公司"><span class="nm">暖流资产</span><span class="tier">50-100亿</span></a><a class="it" href="../%E6%98%A0%E9%9B%AA%E8%B5%84%E6%9C%AC/" data-n="映雪资本 上海映雪投资管理中心(有限合伙)"><span class="nm">映雪资本</span><span class="tier">待核实</span></a><a class="it" href="../%E9%81%82%E7%8E%96%E7%A7%81%E5%8B%9F/" data-n="遂玖私募 杭州遂玖私募基金管理有限公司(曾用名:杭州遂玖资产管理有限公司)"><span class="nm">遂玖私募</span><span class="tier">100-200亿</span></a><a class="it" href="../%E9%92%A7%E5%AF%8C%E6%8A%95%E8%B5%84/" data-n="钧富投资 杭州钧富投资管理合伙企业(有限合伙)"><span class="nm">钧富投资</span><span class="tier">20-50亿</span></a><a class="it" href="../%E6%81%92%E5%BE%B7%E6%97%B6%E4%BB%A3/" data-n="恒德时代 北京恒德时代私募基金管理有限公司(曾用名:北京恒昌弘德资产管理有限公司)"><span class="nm">恒德时代</span><span class="tier">50-100亿</span></a><a class="it" href="../%E5%AE%81%E6%B0%B4%E8%B5%84%E6%9C%AC/" data-n="宁水资本 厦门宁水私募基金管理有限公司(曾用名:厦门宁水投资管理有限公司)"><span class="nm">宁水资本</span><span class="tier">50-100亿</span></a><a class="it" href="../%E6%AD%8C%E6%96%90%E8%AF%BA%E5%AE%9D%E8%B5%84%E4%BA%A7/" data-n="歌斐诺宝资产 歌斐诺宝(上海)资产管理有限公司"><span class="nm">歌斐诺宝资产</span><span class="tier">50-100亿</span></a><a class="it" href="../%E8%9E%8D%E8%91%B5%E6%8A%95%E8%B5%84/" data-n="融葵投资 上海融葵投资管理有限公司"><span class="nm">融葵投资</span><span class="tier">50-100亿</span></a><a class="it" href="../%E9%93%B8%E9%94%8B%E8%B5%84%E4%BA%A7/" data-n="铸锋资产 铸锋资产管理(北京)有限公司"><span class="nm">铸锋资产</span><span class="tier">20-50亿</span></a><a class="it" href="../%E5%B9%BF%E4%B8%9C%E5%BE%B7%E6%B1%87%E6%8A%95%E8%B5%84/" data-n="广东德汇投资 广东德汇投资管理有限公司"><span class="nm">广东德汇投资</span><span class="tier">待核实</span></a><a class="it" href="../%E6%B5%99%E6%B1%9F%E9%93%B6%E4%B8%87/" data-n="浙江银万 浙江银万私募基金管理有限公司(曾用名:浙江银万斯特投资管理有限公司)"><span class="nm">浙江银万</span><span class="tier">20-50亿</span></a><a class="it" href="../%E5%9E%82%E4%BA%91%E7%A7%81%E5%8B%9F/" data-n="垂云私募 海南垂云私募基金管理合伙企业（有限合伙）"><span class="nm">垂云私募</span><span class="tier">100-200亿</span></a>
+</div>
+</aside>
+<main class="main">
+<h1 class="title">纽达投资</h1>
+<div class="full">珠海纽达投资管理有限公司</div>
+<div class="badges"><span class="badge">规模梯队：100-200亿</span> <span class="badge">主力策略：待核实</span> <span class="badge">量化</span> <span class="badge">诚信：无记录</span> <span class="badge">成立：2017-01-16</span></div>
+<div class="body">
+<h2>笔记属性</h2><h3>基本档案</h3><table class="props"><tbody><tr><td class="pk">登记编号</td><td>P1066731</td></tr></tbody></table><h3>公司基础信息</h3><table class="props"><tbody><tr><td class="pk">组织机构代码</td><td>91440400MA4W5X2B30</td></tr><tr><td class="pk">成立时间</td><td>2017-01-16</td></tr><tr><td class="pk">登记时间</td><td>2018-01-09</td></tr><tr><td class="pk">注册地</td><td>广东省</td></tr><tr><td class="pk">实际办公地</td><td>广东省珠海市香洲区横琴新区琴朗道88号1401-1402办公</td></tr><tr><td class="pk">注册资本万元</td><td>1000</td></tr><tr><td class="pk">实缴资本万元</td><td>1000</td></tr><tr><td class="pk">企业性质</td><td>内资企业</td></tr><tr><td class="pk">机构类型</td><td>私募证券投资基金管理人</td></tr><tr><td class="pk">业务类型</td><td>私募证券投资基金、私募证券投资类FOF基金</td></tr><tr><td class="pk">员工总人数</td><td>113</td></tr><tr><td class="pk">从业资格人数</td><td>111</td></tr><tr><td class="pk">投顾资格</td><td>是</td></tr><tr><td class="pk">法定代表人</td><td>邬雄辉</td></tr><tr><td class="pk">实际控制人</td><td>邬金华</td></tr><tr><td class="pk">在管基金数量</td><td>114</td></tr><tr><td class="pk">股权结构</td><td>深圳市纽达科技有限公司 100%（协会出资人公示认缴比例；穿透后实控人为邬金华）</td></tr><tr><td class="pk">重大事项变更</td><td>2026-01-20 出资人变更，办理通过（机构信息最后更新 2026-03-25）</td></tr><tr><td class="pk">会员类型</td><td>观察会员（2021-10-14 入会，会员代表 邬雄辉）</td></tr><tr><td class="pk">实控人类型</td><td>自然人</td></tr><tr><td class="pk">股权集中度</td><td>实控人持股&gt;50%（唯一出资人为深圳市纽达科技有限公司，持股 100%）</td></tr><tr><td class="pk">代持或循环出资</td><td>协会公示未见代持或循环出资披露；但存在**单层法人独资＋实控人另置**的结构，穿透链条是否清晰待核实（2026-10-23 复核）</td></tr><tr><td class="pk">关联机构</td><td>无（协会公示“关联方信息（仅包含关联私募基金管理人）”栏为空）；另有香港关联主体「纽达资本（香港9号牌）」由同一创始人设立，非协会口径关联私募</td></tr><tr><td class="pk">成立年限梯队</td><td>5-10年</td></tr><tr><td class="pk">员工人数梯队</td><td>≥100</td></tr><tr><td class="pk">实缴资本梯队</td><td>1000-5000万</td></tr></tbody></table><h3>团队与治理</h3><table class="props"><tbody><tr><td class="pk">投研组织模式</td><td>顶层PM统筹</td></tr><tr><td class="pk">核心人员</td><td>邬雄辉（创始人、法定代表人、总经理、执行董事、投决会主任委员）、李晋元（副总经理、投资业务负责人）、叶国文（基金经理）、赖云蕾（合规风控负责人）</td></tr><tr><td class="pk">团队背景</td><td>交易员实战</td></tr><tr><td class="pk">团队规模与行业覆盖</td><td>113 人（从业 111 人，协会 2026-03-25）；第三方私募排排网口径 104／102；办公点含珠海、深圳、香港、梅州</td></tr><tr><td class="pk">激励与绑定</td><td>待核实（唯一股东为深圳市纽达科技有限公司，无员工持股平台披露）</td></tr><tr><td class="pk">人员稳定性</td><td>三名备案高管平均任职 7 年以上，均自 2017 年公司备案起在任；核心团队称自 2006 年组建</td></tr><tr><td class="pk">关键人风险</td><td>待核实</td></tr><tr><td class="pk">机构模式</td><td>精品店型</td></tr></tbody></table><h3>策略与规模</h3><table class="props"><tbody><tr><td class="pk">是否量化</td><td>量化</td></tr><tr><td class="pk">策略大类</td><td>债券、套利、量化多空</td></tr><tr><td class="pk">主力策略</td><td>待核实</td></tr><tr><td class="pk">细分策略</td><td>可转债多头（平衡型）、可转债多头＋套利（低波动）、可转债定制化、ETF 套利、股票多空、股指高频/股票 T0（自营起家能力）</td></tr><tr><td class="pk">投资方法论</td><td>多因子、统计套利</td></tr><tr><td class="pk">信号频段</td><td>多频融合</td></tr><tr><td class="pk">换手率</td><td>年化约7-10倍（2022，国金证券）；自营期曾以T0/期指高频为主</td></tr><tr><td class="pk">换手率档位</td><td>低频(&lt;20倍)</td></tr><tr><td class="pk">持仓周期</td><td>周级（周频调仓，2022）</td></tr><tr><td class="pk">持仓周期档位</td><td>周</td></tr><tr><td class="pk">底层数据输入</td><td>量价</td></tr><tr><td class="pk">持仓大小盘偏好</td><td>不适用（可转债为主要持仓，转债无大小盘划分）</td></tr><tr><td class="pk">持仓集中度</td><td>中（第三方向 2023 口径：持仓 40-70 只，单券仓位上限 5%）</td></tr><tr><td class="pk">管理规模</td><td>150-200亿元</td></tr><tr><td class="pk">分策略规模</td><td>待核实</td></tr><tr><td class="pk">策略容量</td><td>自述容量可达百亿（2023，上证报）；转债市场存量约8000亿、深度受限</td></tr><tr><td class="pk">是否临近容量上限</td><td>待核实</td></tr><tr><td class="pk">策略同质度</td><td>待核实</td></tr><tr><td class="pk">规模梯队</td><td>100-200亿</td></tr><tr><td class="pk">回测机制</td><td>待核实</td></tr></tbody></table><h3>风控</h3><table class="props"><tbody><tr><td class="pk">风控体系</td><td>部分可核（第三方向 2023 口径：「排雷」剔除高风险标的＋分散持仓两道防线）</td></tr><tr><td class="pk">止损设定</td><td>待核实（创始人自述个人可接受回撤 5%-10%）</td></tr><tr><td class="pk">集中度限制</td><td>单券仓位≤5%；持仓 40-70 只（第三方向，2023-01）</td></tr><tr><td class="pk">杠杆水平</td><td>待核实</td></tr><tr><td class="pk">流动性</td><td>待核实（可转债 T+0 交易、流动性优于纯债，但极端行情下转债同样出现流动性踩踏）</td></tr><tr><td class="pk">极端行情表现</td><td>待核实（仅有 2022 年转债策略收益 -10% 量级的间接表述）</td></tr></tbody></table><h3>业绩与产品</h3><table class="props"><tbody><tr><td class="pk">代表产品</td><td>纽达二号（2020Q1 复合策略收益 74.19%，获当季复合策略季军）、纽达投资-招享锐进可转债1号、纽达投资量化对冲三号</td></tr><tr><td class="pk">收益_回撤_超额</td><td>第三方/公司自述口径（仅线索）：转债策略 2020 年 +57%、2021 年 +39%；纽达二号 2020Q1 +74.19%</td></tr><tr><td class="pk">业绩归因</td><td>待核实</td></tr><tr><td class="pk">是否代表业绩</td><td>待核实（无托管方核验的完整费后序列）</td></tr><tr><td class="pk">业绩可查年限</td><td>待核实（2018 年转资管，2018-2022 有部分年度收益披露）</td></tr><tr><td class="pk">风险水平</td><td>中波动（转债策略自述回撤目标 5%-10%）</td></tr><tr><td class="pk">最大回撤区间</td><td>10-20%（自述目标带，实际未核）</td></tr></tbody></table><h3>合规与诚信</h3><table class="props"><tbody><tr><td class="pk">诚信记录</td><td>无</td></tr><tr><td class="pk">利益冲突与关联交易</td><td>待核实（无关联私募披露；境内管理人＋香港 9 号牌主体并存，跨境业务与境内产品的隔离安排未公开）</td></tr></tbody></table><h3>运营</h3><table class="props"><tbody><tr><td class="pk">托管机构</td><td>待核实</td></tr><tr><td class="pk">估值频率</td><td>待核实</td></tr><tr><td class="pk">费率结构</td><td>待核实</td></tr><tr><td class="pk">申赎条款</td><td>待核实</td></tr></tbody></table><h2>一、公司基础信息</h2>
+<blockquote>
+<p>本节基础字段取自中基协管理人公示页（P1066731），查询日期 2026-10-23，来源见文末溯源表〔[1]〕。</p>
+</blockquote>
+<ul>
+<li>登记编号 P1066731，2017-01-16 成立，2018-01-09 登记（<strong>成立与登记相隔近一年</strong>，属 2018 年资管转型的时点特征）；机构信息最后更新 2026-03-25〔[1]〕。</li>
+<li>注册资本 1000 万元、实缴 1000 万元、实缴比例 100%；员工 113 人、取得从业资格 111 人（覆盖率 <strong>98.2%，本批四家最高</strong>）〔[1]〕。</li>
+<li>注册地 = 办公地 = 广东省珠海市香洲区横琴新区琴朗道88号1401-1402办公。<strong>注册地与办公地完全相同</strong>，协会「机构提示信息」无跨辖区提示〔[1]〕。</li>
+<li>业务类型：私募证券投资基金、私募证券投资类FOF基金；<strong>投顾资格：是</strong>〔[1]〕。</li>
+<li>在管基金数量：114 只（主表 CSV 快照，2026-10-13）〔[1]〕。</li>
+<li>协会「机构网址」栏为空〔[1]〕；第三方与公司自述官网为 www.newdaq.com〔[3]〕。</li>
+</ul>
+<h4>股权结构：本档最需要问清的一处</h4>
+<ul>
+<li>协会出资人（认缴比例）：<strong>深圳市纽达科技有限公司 100%</strong>——<strong>单一法人股东、无自然人直接持股</strong>〔[1]〕。</li>
+<li>实际控制人备案为 <strong>邬金华</strong>；法定代表人、总经理、创始人为 <strong>邬雄辉</strong>〔[1]〕。</li>
+<li><strong>这是一个必须写明的结构性事实</strong>：公司唯一股东是一家深圳科技公司，穿透后实控人姓「邬」但不是创始人邬雄辉，而是<strong>邬金华</strong>。二者是否亲属、邬金华在集团内担任何职、为何由其实控——<strong>公开渠道（协会、私募排排网、百度百科、财联社与上证报专访）全部未提及「邬金华」三字</strong>〔[1]〕〔[2]〕〔[3]〕〔[4]〕。</li>
+<li>该结构的三个可检验含义：
+  1. <strong>创始人不是实控人</strong>：邬雄辉在所有对外材料中被称为「创始人、总经理」，但工商穿透的实际控制人是另一人。<strong>创始人身份与控制权归属不一致</strong>，需问清决策权实际归属〔[1]〕。
+  2. <strong>双层架构的合规含义</strong>：单一法人股东意味着协会公示层面看不到自然人持股比例，「代持或循环出资」的判断只能到法人层为止，<strong>再往下不可核验</strong>〔[1]〕。
+  3. <strong>2026-01-20 刚发生出资人变更</strong>（办理通过），恰在机构信息最后更新（2026-03-25）之前。<strong>变更前是谁、为何变更，协会未公示历史</strong>，待核实〔[1]〕。</li>
+<li><strong>本档判断</strong>：不将「实控人≠创始人」直接认定为风险，但按标签字典「关联机构／代持或循环出资」的关注逻辑，此处存在<strong>信息不可核验的缺口</strong>，已计入待核实清单，未据此加贴 <code>重点跟踪</code>（因无处罚、无关联私募、无代持证据）。</li>
+</ul>
+<h4>高管备案（三人，平均在任 7 年以上）</h4>
+<ul>
+<li><strong>邬雄辉</strong>：法定代表人、总经理、执行董事、信息填报负责人、<strong>投资决策委员会主任委员</strong>（一人兼五职）。</li>
+<li>协会履历：2004.07–2007.04 安永会计师事务所审计部审计师 → 2007.05–2014.08 <strong>梅州市纽达投资有限公司</strong>总经理 → 2014.08–2017.03 广州晋雄资产管理有限公司总经理 → 2017.04 至今 本公司〔[1]〕。</li>
+<li>学历与经历：1999 年考入清华大学建筑系，后获香港赛马会奖学金转学至<strong>香港浸会大学</strong>；2006 年从香港回广东梅州创办纽达投资，早期从事<strong>股票 T0、A 股 T0、期指高频</strong>等自营投资；2018 年转型资管〔[2]〕〔[4]〕。</li>
+<li><strong>一个必须点出的错位</strong>：其本科为建筑学（后转学），<strong>非数理或金融科班</strong>；但其从业路径是纯粹的<strong>交易员路线</strong>（T0／高频自营 → 资管），与「学院派量化」是两条不同的能力来源〔[2]〕〔[4]〕。</li>
+<li><strong>李晋元</strong>：副总经理、投资业务负责人、投资决策委员会委员。</li>
+<li>协会履历：2009.09–2014.08 梅州市纽达投资有限公司投资部 <strong>投资总监</strong> → 2014.09–2017.03 广州晋雄资产管理有限公司投资部投资经理 → 2017.04 至今 本公司〔[1]〕。</li>
+<li>第三方评价：「超 17 年证券从业经验，擅长短线交易与套利策略」〔[3]〕。</li>
+<li><strong>注意职级倒挂</strong>：2009–2014 年李晋元在梅州纽达已是<strong>投资总监</strong>，而邬雄辉同期（2007–2014）是<strong>总经理</strong>——两人在梅州纽达时期即为上下级，至今合作超过 16 年〔[1]〕。</li>
+<li><strong>赖云蕾</strong>：合规风控负责人。协会履历完整展示了一条<strong>纯内部晋升链</strong>：2008.07–2017.03 梅州市纽达投资风控部风控经理 → 2017.04–2017.10 本公司风控管理部门风险管理负责人 → 2017.11–2018.02 本公司<strong>财务部门财务主管</strong> → 2018.03–2018.12 本公司风控部风控副总经理 → 2019.01 至今 合规风控负责人〔[1]〕。</li>
+<li><strong>一处反常的调动</strong>：2017.11–2018.02 从风控转去<strong>财务部任财务主管</strong>仅 4 个月，随后又回到风控并升任负责人。<strong>风控与财务互转、且间隔极短</strong>，是本批四家中唯一的此类履历，其独立性与岗位设置逻辑待核实〔[1]〕。</li>
+<li><strong>三名高管的共同点</strong>：全部自 2017 年公司设立起在任，无一外部空降；且邬雄辉与李晋元均出自「梅州市纽达投资有限公司」——<strong>该公司是纽达体系的前身实体</strong>〔[1]〕〔[2]〕。</li>
+</ul>
+<h4>人员与产品披露</h4>
+<ul>
+<li>员工 113 人（从业 111 人），覆盖率 <strong>98.2%，本批四家中最高</strong>〔[1]〕。</li>
+<li><strong>口径冲突并列</strong>：协会 113／111（2026-03-25）〔[1]〕；私募排排网 104／102〔[3]〕；创始人 LinkedIn 自述「香港、深圳、珠海和梅州设有办公室，目前管理规模 60 多亿人民币」（该表述时点为 2024 年）〔[5]〕。<strong>协会员工数高于第三方 9 人</strong>，与规模同时从 60 亿级跃至 150-200 亿的方向一致〔[1]〕〔[3]〕〔[6]〕。</li>
+<li>产品披露（协会公示统计，抓取日 2026-10-23）：<strong>公示产品 141 只，其中在运作 115 只、已清算 26 只（清算率 18.4%）</strong>；累计应披露 1787 条、未披露 82 条（缺报率 <strong>4.59%</strong>）；投资者查询账号开立率 <strong>99.95%</strong>〔[1]〕。</li>
+<li><strong>99.95% 的开立率是本批四家最高</strong>（微观博易 99.93%、宽投 93.86%、顽岩 93.44%）。<strong>开立率高说明投资者服务与账户体系规范</strong>，与诚信记录无关，但与「大学教育基金会、上市公司及金融机构」这类机构客户的准入要求相符〔[1]〕〔[3]〕。</li>
+<li>产品命名特征：大量「善衡」「利道永晟」「青龙」「同甫」等<strong>渠道/合作方前缀</strong>，以及「可转债N号」「量化对冲N号」「灵活配置N号」等<strong>策略明示型名称</strong>——后者比例明显高于宽投，<strong>约 19 只直接以「可转债」命名</strong>〔[1]〕。</li>
+</ul>
+<h2>二、团队与治理</h2>
+<ul>
+<li><strong>投研组织模式</strong>：协会备案仅三名高管，其中邬雄辉<strong>兼任投资决策委员会主任委员</strong>，李晋元为投资业务负责人兼投决会委员。<strong>决策权集中在投决会，未见 PM 制或分组</strong>〔[1]〕。</li>
+<li><strong>团队来源单一但历史长</strong>：核心团队自称「组建于 2006 年」，由邬雄辉、李晋元在梅州市纽达投资时期形成；2017 年在珠海横琴新设本公司承接资管业务〔[1]〕〔[2]〕。<strong>这意味着投研班底已合作约 20 年</strong>，是本批四家中核心团队共事时间最长的一家〔[2]〕〔[4]〕。</li>
+<li><strong>地理布局</strong>：珠海（注册与办公）、深圳（投研中心，2021 年设）、香港（投研中心，2019 年设、2023 年扩）、梅州（早期基地）〔[2]〕〔[4]〕〔[5]〕。<strong>四地布局但总人数仅 113 人</strong>，单点平均不足 30 人；深圳与香港两处「投研中心」的具体人数未公开，待核实〔[1]〕〔[5]〕。</li>
+<li><strong>跨境主体</strong>：创始人另设「纽达资本（香港 9 号牌）」（LinkedIn 自述亦称「景和资本（香港）」）〔[5]〕。<strong>协会「关联方信息（仅包含关联私募基金管理人）」栏为空</strong>，因该香港主体不属中基协登记范围，故不入协会口径；但<strong>境内私募＋境外 9 号牌并存</strong>，跨境业务的客户隔离、同一策略在两地的执行与分配，均未公开〔[1]〕〔[5]〕。</li>
+<li><strong>激励与绑定</strong>：唯一股东为深圳市纽达科技有限公司，<strong>未见员工持股平台</strong>。三名高管的绑定靠长期共事与职务，而非股权〔[1]〕。</li>
+<li><strong>机构模式判断：精品店型</strong>。理由：单一法人股东、三名备案高管、投决会集中决策、核心班底 20 年未散〔[1]〕〔[2]〕。</li>
+<li>关注点：① 实控人邬金华身份完全空白；② 合规负责人由风控→财务→风控的往返调动；③ 四地 113 人的分布与人均产出；④ 境内＋香港双主体的业务隔离。</li>
+<li>员工规模：员工人数超过 100 人（截至 2026-04 底，71 家百亿量化中员工超百人的 12 家之一；排排网数据，第三方口径）〔[8]〕</li>
+</ul>
+<h2>三、策略与规模</h2>
+<p><strong>可比指标速览</strong></p>
+<table>
+<thead>
+<tr>
+<th>指标</th>
+<th>数值</th>
+<th>口径/时点</th>
+<th>来源</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>管理规模</td>
+<td>100亿元以上（协会区间）</td>
+<td>协会，2026-03-25</td>
+<td>〔[1]〕</td>
+</tr>
+<tr>
+<td>规模梯队</td>
+<td>150-200亿</td>
+<td>第三方 AUM 图谱，2026Q3</td>
+<td>〔[6]〕</td>
+</tr>
+<tr>
+<td>换手率</td>
+<td>待核实</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>持仓只数</td>
+<td>40-70 只（转债）</td>
+<td>公司自述，2023-01</td>
+<td>〔[2]〕</td>
+</tr>
+<tr>
+<td>单券上限</td>
+<td>5%</td>
+<td>公司自述，2023-01</td>
+<td>〔[2]〕</td>
+</tr>
+<tr>
+<td>行业暴露</td>
+<td>不适用（转债策略）</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>风格敞口</td>
+<td>待核实</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>因子库</td>
+<td>待核实</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>子策略数</td>
+<td>3 条产品线（平衡型／低波动／定制化）</td>
+<td>官网，2026-10</td>
+<td>〔[3]〕</td>
+</tr>
+<tr>
+<td>信号结构</td>
+<td>多频融合（T0＋套利＋多头）</td>
+<td>公司自述＋协会履历</td>
+<td>〔[1]〕〔[2]〕</td>
+</tr>
+<tr>
+<td>转债容量</td>
+<td>待核实（受转债市场存量约束）</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>中性容量</td>
+<td>待核实</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>托管机构</td>
+<td>待核实</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>员工人数</td>
+<td>113 人（从业 111）</td>
+<td>协会，2026-03-25</td>
+<td>〔[1]〕</td>
+</tr>
+<tr>
+<td>投顾资格</td>
+<td>是</td>
+<td>协会，2026-03-25</td>
+<td>〔[1]〕</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>是否量化</strong>：量化。公司自述「借助丰富的市场经验、优秀的数学模型和先进的计算机技术进行全球多资产投资的量化私募公司」〔[3]〕。</li>
+<li><strong>能力起源与转型</strong>（这是理解纽达的关键）〔[2]〕〔[4]〕：</li>
+<li>2006–2017 年：<strong>自营</strong>阶段，做股票 T0、A 股 T0、期指高频，覆盖美、加、日、澳、中主要交易所。</li>
+<li>2018 年：登记为私募管理人，<strong>从自营转资管</strong>。</li>
+<li>2018 年起：把<strong>可转债</strong>作为重点资产配置（当时转债市场「还不活跃」）。</li>
+<li><strong>路径判断</strong>：这是「<strong>交易员自营 → 资管 → 转债细分</strong>」的三段式，与顽岩（高频期货→股票量化）、微观博易（低延迟自营→指增）的路径相似，都属于<strong>先有交易能力、后建资管产品</strong>的类型〔[2]〕〔[4]〕。</li>
+<li><strong>策略谱系（官网三分法）</strong>〔[3]〕：</li>
+<li><strong>平衡型</strong>：纯可转债多头策略，「构建攻守兼备的投资组合，追求良好的收益风险比」。</li>
+<li><strong>低波动</strong>：可转债多头<strong>叠加多种套利策略</strong>，追求「高确定性低回撤」。</li>
+<li><strong>定制化</strong>：按客户风险偏好定制。</li>
+<li>官网招聘栏另设「基金经理—高频方向」（做市、统计套利、事件驱动套利、订单簿/Tick 微观结构）与「基金经理—套利方向」（跨市场 A股/港股/美股、跨品种股票/期货/期权/可转债、统计套利/跨期/事件驱动/跨境）〔[3]〕。<strong>这两条招聘线说明其能力边界不止转债多头</strong>，且明确要做跨境套利。</li>
+<li><strong>与协会产品名称的对照</strong>〔[1]〕：141 只公示产品中，名称含「转债」19 只、含「指增/增强」8 只、含「中性/对冲」5 只、含「CTA/管理期货」1 只、含「套利」2 只，其余约 106 只无策略明示。<strong>转债产品仅占名称可辨部分的多数（19/35）</strong>，与官网「纯可转债为主」的定位一致；但<strong>指增 8 只的存在说明其已延伸到股票量化</strong>，这是旧档「策略大类：债券」单值所遗漏的〔[1]〕。</li>
+<li><strong>规模轨迹</strong>：2024 年创始人自述<strong>60 多亿</strong>〔[5]〕→ 2026Q3 第三方图谱列入 <strong>150-200 亿</strong>区间〔[6]〕。<strong>两年内规模增长约 2.5 倍</strong>。</li>
+<li><strong>必须提出的疑问</strong>：可转债市场存量约 8000 亿量级〔依 2024 年公开数据〕，一只百亿级转债多头基金即相当于市场存量的 1%+。<strong>规模从 60 亿到 150-200 亿，转债策略的容量能否承接，是首要问题</strong>；若无答案，规模增长可能更多来自指增／套利等非转债线〔[1]〕〔[5]〕〔[6]〕。</li>
+<li><strong>容量</strong>：公开渠道无任何容量数字。</li>
+</ul>
+<h2>四、风控</h2>
+<ul>
+<li><strong>风控体系（可核部分）</strong>：创始人 2023 年明确表述两道防线〔[2]〕：
+  1. <strong>「排雷」</strong>——排除风险较高的标的；
+  2. <strong>分散持仓</strong>——持仓平均 40-70 只，<strong>个券仓位集中度限制在 5% 以内</strong>。</li>
+<li><strong>回撤目标</strong>：创始人自述「我个人能接受的回撤在 5% 到 10% 之间」，并称「防守的要点是控制回撤的幅度，在市场波动时期，具备防守性的标的可将回撤控制在 10% 以内」〔[2]〕。<strong>这是一个明确的自设标准，可用于后续核验</strong>。</li>
+<li><strong>本档要重点指出的策略前提变化（重要）</strong>：</li>
+<li>2023 年 1 月专访中的一条核心论证是「<strong>可转债迄今零违约</strong>，具备良好的防守属性」，并据此推出「纯债价值提供价格支撑，回撤空间能有效预测并得到控制」〔[2]〕。</li>
+<li><strong>该前提已在 2024 年被证伪</strong>：2024-03-12 搜特转债利息违约、2024-05-17 回售款项违约，成为首只实质性违约可转债；2024-08-13 蓝盾退债本息违约；同期鸿达转债、岭南转债亦违约——<strong>2024 年一年内 4 只转债违约，打破 30 余年「零违约」纪录</strong>〔[7]〕。</li>
+<li><strong>这意味着</strong>：纽达「债底＝安全垫」的风控逻辑，其赖以成立的市场假设已经改变。<strong>同一条逻辑在 2023 年成立、在 2024 年后不再无条件成立</strong>。公司此后是否调整了「排雷」标准（如加入信用评级门槛、退市风险筛查），公开渠道未见说明，<strong>这是本档最需要问清的风控问题</strong>〔[2]〕〔[7]〕。</li>
+<li>佐证：同期专业机构已明确提示「双低策略已不再是简单挑选低价格、低转股溢价率的可转债」，需「剔除劣质评级、有较大退市风险的转债」〔[7]〕。</li>
+<li><strong>止损设定、杠杆水平、流动性安排</strong>：公开渠道未披露，待核实〔[1]〕。</li>
+<li><strong>集中度（唯一硬参数）</strong>：单券 ≤5%。按 40-70 只持仓计算，组合层面单券平均权重 1.4%-2.5%，上限 5% 意味着<strong>个别标的最多可占组合二十分之一</strong>——在转债违约个案出现的市场里，5% 的单券上限对应的单券最大损失为组合的 5%（若归零）〔[2]〕。</li>
+<li>关注点：① 「零违约」前提失效后的排雷标准是否升级；② 单券 5% 上限在信用风险常态化下是否足够；③ 转债容量与 150-200 亿规模的匹配。</li>
+</ul>
+<h2>五、业绩与代表产品</h2>
+<ul>
+<li><strong>可获得的业绩信息均为第三方或自述口径，且时点偏早</strong>〔[2]〕〔[3]〕〔[4]〕：</li>
+<li><strong>转债策略年度收益</strong>：2020 年 <strong>+57%</strong>、2021 年 <strong>+39%</strong>（创始人自述，用于说明「转债在牛市中上涨不输股票」）〔[2]〕。</li>
+<li><strong>纽达二号</strong>：2020 年一季度复合策略收益 <strong>74.19%</strong>，获当季复合策略季军（百度百科引第三方赛事）〔[4]〕。</li>
+<li><strong>2022 年</strong>：创始人称「转债资产其实是权益多头……回撤表现会较优」，但未给具体数字；同期中证转债指数全年 <strong>-10.02%</strong>（对比沪深300 -21.63%、创业板 -29.37%）〔[2]〕。</li>
+<li><strong>必须指出的三点问题</strong>：
+  1. <strong>2020、2021 是转债与权益的双牛年</strong>。+57%、+39% 的收益在很大程度上是市场 Beta，<strong>不能作为策略 Alpha 的证据</strong>〔[2]〕。
+  2. <strong>2022 年之后无任何年度收益披露</strong>。而这三年恰是转债信用风险暴露（2024 年 4 只违约）、市场规模见顶回落（2024 年存量较年初减少 710 亿）的时期〔[7]〕。<strong>用 2021 年之前的业绩说明当下能力，时间跨度已过大</strong>。
+  3. <strong>2020Q1 +74.19% 的样本极小且时点特殊</strong>（疫情冲击后的极端波动季度），且为「复合策略季军」——<strong>季军意味着同季有两只产品收益更高</strong>，作为能力证明的效力有限〔[4]〕。</li>
+<li><strong>获奖（已核实，2025 年集中）</strong>〔[3]〕：</li>
+<li>2025 中国证券报<strong>金牛奖·金牛私募管理公司（年度相对价值策略）</strong></li>
+<li>2025 上海证券报<strong>金阳光奖·年度成长私募公司奖（复合策略）</strong></li>
+<li>2025 中国基金报<strong>英华奖·产品示范案例（三年期转债策略）</strong></li>
+<li>2025 中国基金报<strong>英华奖·成长示范机构</strong></li>
+<li>2025 证券时报<strong>金长江奖·快速成长私募基金管理人</strong></li>
+<li>2024 中国基金报<strong>英华奖·产品示范案例（相对价值套利策略）</strong></li>
+<li><strong>读法</strong>：六项奖中有四项直接指向「相对价值／套利／转债」，与策略定位吻合；「快速成长」「年度成长」类奖项则印证了其规模跃升。<strong>2025 年是纽达的获奖大年，也是其规模从 60 亿级跃至 150-200 亿的年份</strong>——两者同向，需注意「规模增长」与「评奖」的时序关系〔[3]〕〔[6]〕。</li>
+<li>业绩归因、费后夏普、年化波动：公开渠道无完整序列，待核实。</li>
+<li>是否代表业绩：<strong>待核实</strong>。无托管方核验的完整费后序列。</li>
+<li>净值库内留存归档，存在时效性、无法实时更新。</li>
+</ul>
+<h2>六、合规与诚信</h2>
+<ul>
+<li><strong>中基协纪律处分：公开渠道未见</strong>。</li>
+<li><strong>证监会／证监局行政监管措施或行政处罚：公开渠道未见</strong>〔[1]〕。</li>
+<li><strong>交易所／中证协自律措施：公开渠道未见</strong>。</li>
+<li><strong>税务处罚：公开渠道未见</strong>。</li>
+<li><strong>协会提示信息：空；机构诚信信息：空</strong>（2026-10-23 复核）〔[1]〕。具体而言：</li>
+<li>无「存在长期处于清算状态基金」提示——其清算率 18.4%（26/141），高于顽岩（2.6%）、微观博易（3.0%），低于宽投（51.7%），未触发提示〔[1]〕；</li>
+<li>无「注册地与办公地不在同一辖区」提示——两者地址完全相同〔[1]〕；</li>
+<li>无「信息报送异常」——缺报率 4.59%，居中〔[1]〕。</li>
+<li><strong>本档对「诚信无记录」的限定</strong>：这只是<strong>协会层面</strong>无记录。<strong>协会诚信栏为空不等于无处罚</strong>——本批平方和投资的税务处罚（甬税稽三罚〔2025〕90 号）即未进入协会公示。纽达是否有税务、市场监管等其他条线处罚，本档未逐一检索税务局与市场监管公示，<strong>属未穷尽检索</strong>，不宣称「完全无瑕疵」〔[1]〕。</li>
+<li><strong>利益冲突与关联交易</strong>：协会「关联方信息」栏为空〔[1]〕。待核实项：</li>
+<li><strong>境内私募＋香港 9 号牌双主体</strong>：同一创始人在两地持牌，客户来源、同一策略在两地的执行先后、是否存在境内产品为境外主体「接盘」的安排，均未公开〔[5]〕。</li>
+<li>三条产品线（平衡型／低波动／定制化）共享同一转债池，<strong>不同产品间的券种分配与交易顺序</strong>未公开〔[3]〕。</li>
+<li><strong>需记录的治理观察（非处罚）</strong>：实际控制人邬金华在全部公开材料中零出现，创始人邬雄辉为对外唯一代表。<strong>「谁对外说话」与「谁最终控制」分离</strong>，属信息透明度问题而非诚信瑕疵，本档如实记录〔[1]〕〔[2]〕〔[3]〕〔[4]〕。</li>
+<li>综合判断：<strong>协会层面诚信记录干净</strong>，且清算率、缺报率均在合理区间；未触发 <code>重点跟踪</code>。</li>
+</ul>
+<h2>七、运营</h2>
+<ul>
+<li>托管机构、估值频率、费率结构、申赎条款：公开渠道均未披露，待核实〔[1]〕。</li>
+<li><strong>客户结构（一条可核的正面信息）</strong>：第三方称其「自 2018 年转型资管业务以来……赢得了<strong>大学教育基金会、多家上市公司及金融机构</strong>的认可与资金配置」〔[3]〕。机构客户占比高，通常对应更严格的准入与披露要求，与其 99.95% 的投资者查询账号开立率相符〔[1]〕〔[3]〕。</li>
+<li>官网新设招聘：基金经理—高频方向、基金经理—套利方向（明确要求订单簿/Tick 微观结构、跨市场跨品种套利能力），<strong>说明其正在扩充非转债能力</strong>〔[3]〕。</li>
+<li>协会「机构网址」栏为空，官网域名需通过第三方确认，<strong>这一栏空缺本身不影响合规</strong>，但对投资者核验不利〔[1]〕〔[3]〕。</li>
+</ul>
+<h2>八、信息溯源总表</h2>
+<table>
+<thead>
+<tr>
+<th>编号</th>
+<th>来源</th>
+<th>链接</th>
+<th>查询时间</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>[1]</td>
+<td>中国证券投资基金业协会·珠海纽达投资管理有限公司公示页（P1066731；观察会员 2021-10-14；唯一出资人 深圳市纽达科技有限公司 100%；实际控制人 邬金华；员工 113／从业 111；投顾资格 是；公示产品 141 只／运作 115／清算 26；应披露 1787 条／未披露 82 条；开立率 99.95%；诚信栏与提示栏为空；2026-01-20 出资人变更；高管 邬雄辉／李晋元／赖云蕾完整履历；关联方栏为空；机构网址栏为空）</td>
+<td><a href="https://gs.amac.org.cn/amac-infodisc/res/pof/manager/1706011016102747.html" target="_blank" rel="noopener">https://gs.amac.org.cn/amac-infodisc/res/pof/manager/1706011016102747.html</a></td>
+<td>2026-10-23</td>
+</tr>
+<tr>
+<td>[2]</td>
+<td>财联社《纽达投资创始人邬雄辉：后疫情时代，万亿可转债市场，不容错过》2023-01-17（界面财联社《安安访谈录·资管大家》；<strong>公司自述＋记者专访</strong>：核心团队组建于 2006 年；2018 年起关注可转债；转债策略 2020 年 +57%、2021 年 +39%；持仓平均 40-70 只、个券集中度 ≤5%；个人可接受回撤 5%-10%；「可转债迄今零违约」「下有保底、上不封顶」等核心论证；2022 年中证转债指数 -10.02% 对比数据）</td>
+<td><a href="https://www.cls.cn/detail/1243816" target="_blank" rel="noopener">https://www.cls.cn/detail/1243816</a></td>
+<td>2026-10-23</td>
+</tr>
+<tr>
+<td>[3]</td>
+<td>纽达投资官网（<strong>公司自述</strong>：定位「全球多资产投资的量化私募公司」；产品线 01 平衡型／02 低波动／03 定制化；荣誉栏「英华奖三年期转债策略产品示范案例」；招聘岗「基金经理—高频方向」「基金经理—套利方向」及其职责描述）及私募排排网公司档案（荣誉 6 条全部年份与主办方；基金经理 5 人；全职员工 104／从业 102；「大学教育基金会、多家上市公司及金融机构」客户表述；办公地 珠海）</td>
+<td><a href="https://www.newdaq.com/" target="_blank" rel="noopener">https://www.newdaq.com/</a> ；<a href="https://dc.simuwang.com/company/CO00000XV6.html" target="_blank" rel="noopener">https://dc.simuwang.com/company/CO00000XV6.html</a></td>
+<td>2026-10-23</td>
+</tr>
+<tr>
+<td>[4]</td>
+<td>百度百科·邬雄辉（<strong>第三方百科，仅作线索</strong>：1999 年考入清华、2000 年转学香港；2006 年回梅州创办纽达；2018 年登记私募；2019 香港／2021 深圳设投研办公室；「纽达二号」2020Q1 复利策略收益 74.19% 获季军；2022 天风证券年度最佳私募基金经理；2023 金长江奖年度新锐私募基金经理；管理规模超 20 亿〔旧口径〕）及上海证券报 2023-07-31 专访《聚焦可转债策略 做难而正确的事》</td>
+<td><a href="https://baike.baidu.com/item/邬雄辉/63424876" target="_blank" rel="noopener">https://baike.baidu.com/item/邬雄辉/63424876</a> ；<a href="https://www.cnstock.com/commonDetail/17735" target="_blank" rel="noopener">https://www.cnstock.com/commonDetail/17735</a></td>
+<td>2026-10-23</td>
+</tr>
+<tr>
+<td>[5]</td>
+<td>邬雄辉 LinkedIn 个人页（<strong>自述，仅作线索</strong>：「纽达投资（国内私募）和纽达资本（香港 9 号牌）的创始人和总经理」；「在香港、深圳、珠海和梅州设有办公室，目前管理规模 60 多亿人民币」；主业含可转债、ETF 套利、高频交易）</td>
+<td><a href="https://linkedin.com/in/雄辉-邬-43a8b5223" target="_blank" rel="noopener">https://linkedin.com/in/雄辉-邬-43a8b5223</a></td>
+<td>2026-10-23</td>
+</tr>
+<tr>
+<td>[6]</td>
+<td>21 世纪经济报道／21 财经《最新出炉！2026三季度百亿量化私募管理规模一览》2026-10-09（优优私募口径：150-200 亿区间「倍漾量化、<strong>纽达投资</strong>、微观博易等 10 家」）</td>
+<td><a href="https://www.21jingji.com/article/20261009/herald/48124b2390b5bebdd00ee108afcd4bdf.html" target="_blank" rel="noopener">https://www.21jingji.com/article/20261009/herald/48124b2390b5bebdd00ee108afcd4bdf.html</a></td>
+<td>2026-10-23</td>
+</tr>
+<tr>
+<td>[7]</td>
+<td>中证鹏元《2024 年可转债信用风险与违约分析》2025-03-19（<strong>评级机构研报</strong>：2024 年违约转债 4 只——搜特转债 2024-03-12 利息违约／2024-05-17 回售款违约、鸿达转债、蓝盾退债 2024-08-13 本息违约、岭南转债 2024-08-14 本息违约；打破三十余年「零违约」；岭南转债为全国首例违约国企转债）及证券时报《可转债投资大变局 30 年零违约历史或打破》2023-05-12（「双低策略已不再是简单挑选低价格、低转股溢价率的可转债」）</td>
+<td><a href="https://www.cspengyuan.com/api/files/6960d58342b27b2bdc799fdc" target="_blank" rel="noopener">https://www.cspengyuan.com/api/files/6960d58342b27b2bdc799fdc</a> ；<a href="https://www.stcn.com/article/detail/864067.html" target="_blank" rel="noopener">https://www.stcn.com/article/detail/864067.html</a></td>
+<td>2026-10-23</td>
+</tr>
+<tr>
+<td>[8]</td>
+<td>100万基金网《从"四大天王"到"七十诸侯"！百亿量化私募数量连续新高！》2026-05-19（转引排排网：截至2026-04底员工超百人的12家百亿量化之一；第三方聚合口径）</td>
+<td><a href="https://www.100wjjw.com/knowledgeinfo/3308.html" target="_blank" rel="noopener">https://www.100wjjw.com/knowledgeinfo/3308.html</a></td>
+<td>2026-10-25</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>主表 CSV 采集日期：2026-10-13；协会机构信息最后更新：2026-03-25。</li>
+<li>本档所有第三方数据均标注「仅作线索」，未与协会口径混同。</li>
+<li>本档对旧版（CSV 2026-10-13 快照）的<strong>四处纠正/补正</strong>：① 开立率原记 99.95%（正确）、缺报原记 118 条，实为 82 条；② 产品数原记 142／116／26，实为 141／115／26；③ 策略大类原仅「债券」，补入「套利、量化多空」（依据官网低波动线与套利招聘线、协会产品名称中 8 只指增与 2 只套利）；④ 新增「实控人邬金华 ≠ 创始人邬雄辉」这一治理事实，旧档仅有「实际控制人: 邬金华」而无任何说明。</li>
+</ul>
+</div>
+</main>
+</div>
+<script>function f(){var q=document.getElementById("q").value.trim().toLowerCase();document.querySelectorAll("#list .it").forEach(function(e){var t=(e.getAttribute("data-n")||"").toLowerCase();e.style.display=(!q||t.indexOf(q)>=0)?"":"none";});}</script>
+</body>
+</html>
